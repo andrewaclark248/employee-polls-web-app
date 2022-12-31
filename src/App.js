@@ -6,18 +6,19 @@ import Login from './Login.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-function App() {
+
+function App(props) {
+  console.log("App ====", props)
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/">
-            <Route index element={<Login />} />
-            <Route path="home" element={<Home />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-
+        <BrowserRouter>
+          <Routes>
+            <Route path="/">
+              <Route index element={<Login />} />
+              <Route path="home" element={<Home {...props}/>} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
     </div>
   );
 }
