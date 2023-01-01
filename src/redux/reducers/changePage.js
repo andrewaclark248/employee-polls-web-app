@@ -1,4 +1,4 @@
-import { LOGIN_PAGE, HOME_PAGE, NEW_POLL_PAGE, SHOW_POLL_PAGE } from '../actions/changePageAction';
+import { LOGIN_PAGE, HOME_PAGE, NEW_POLL_PAGE, SHOW_POLL_PAGE, ANWSERED_POLL_PAGE } from '../actions/changePageAction';
 
 
 const initialState = {
@@ -26,6 +26,11 @@ export const changePage = (state = initialState, action) => {
 		x =  {
 			...state,
 			currentPage: SHOW_POLL_PAGE
+		}
+	} else if(action.type == ANWSERED_POLL_PAGE) {
+		x =  {
+			...state,
+			currentPage: ANWSERED_POLL_PAGE
 		}
 	} else {
 		x = state;

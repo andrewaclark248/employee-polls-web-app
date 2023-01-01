@@ -5,12 +5,13 @@ import Home from './Home.js';
 import Login from './Login.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { connect } from "react-redux";
-import { LOGIN_PAGE, HOME_PAGE, NEW_POLL_PAGE, SHOW_POLL_PAGE } from "./redux/actions/changePageAction.js"
+import { LOGIN_PAGE, HOME_PAGE, NEW_POLL_PAGE, SHOW_POLL_PAGE, ANWSERED_POLL_PAGE } from "./redux/actions/changePageAction.js"
 import AppNavBar from './Navbar.js';
 import NewPoll from './NewPoll.js';
 import NotificationBox from './NotificationBox.js';
 import React, { useState } from 'react';
 import ShowPoll from './ShowPoll.js';
+import AnwseredPoll from './AnwseredPoll.js';
 
 
 
@@ -18,6 +19,7 @@ import ShowPoll from './ShowPoll.js';
 function App(props) {
   let [show, setShow] = useState(false);
   let [currentPoll, setCurrentPoll] = useState("");
+  let [alertText, setAlertText] = useState("");
 
   return (
     <div className="App">
@@ -27,7 +29,7 @@ function App(props) {
           </div>
         }
         {show &&
-          <NotificationBox showNotificationBox={setShow}/>
+          <NotificationBox showNotificationBox={setShow} alertText={alertText}/>
         }
         {props.currentPage == LOGIN_PAGE &&
           <Login {...props}/>
@@ -36,11 +38,14 @@ function App(props) {
           <Home {...props} setCurrentPoll={setCurrentPoll}/>
         }
         {props.currentPage == NEW_POLL_PAGE &&
-          <NewPoll {...props} showNotificationBox={setShow}/>
+          <NewPoll {...props} showNotificationBox={setShow} setAlertText={setAlertText}/>
         }  
         {props.currentPage == SHOW_POLL_PAGE &&
-          <ShowPoll currentPoll={currentPoll}/>
-        }        
+          <ShowPoll currentPoll={currentPoll} allPolls={props.allPolls} showNotificationBox={setShow} setAlertText={setAlertText}/>
+        }
+        {props.currentPage == ANWSERED_POLL_PAGE &&
+          <AnwseredPoll currentPoll={currentPoll}  {...props} />
+        }      
     </div>
   );
 }

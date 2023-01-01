@@ -1,4 +1,4 @@
-import { NEW_POLL_TYPE } from '../actions/pollActions.js';
+import { NEW_POLL_TYPE, UPDATE_POLL_TYPE } from '../actions/pollActions.js';
 
 
 const initialState = {
@@ -20,6 +20,19 @@ export const changePoll = (state = initialState, action) => {
 		var listOfPolls = state.allPolls.concat(newPoll)
 		var result = { ...state, allPolls: listOfPolls}
 		//console.log("changePoll.js = ", returnVar)
+		return result;
+	} else if (action.type == UPDATE_POLL_TYPE) {
+		var updatedPoll = state.allPolls.filter((poll) => {
+			return poll.pollName == action.payload.pollName
+		})[0]
+		updatedPoll.answer = action.payload.pollChoice
+		
+		var allUserPolls = state.allPolls.filter((poll) => {
+			return poll.pollName != action.payload.pollName
+		})
+
+		var listOfPolls = allUserPolls.concat(updatedPoll)
+		var result = { ...state, allPolls: listOfPolls}
 		return result;
 	} else {
 		return state;
