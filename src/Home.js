@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
+import { SHOW_POLL_PAGE } from "./redux/actions/changePageAction.js"
 
 function Home(props) {
   var userUnansweredPolls = null;
     if (props.allPolls.length > 0) {
       userUnansweredPolls = unansweredPolls(props.allPolls, props.currentUser)
-      console.log(userUnansweredPolls != null)
     }
     
     return (
@@ -25,14 +25,16 @@ function Home(props) {
                   <div className="">
                     {userUnansweredPolls != null &&
                       userUnansweredPolls.map((poll, index) => {
-                        return (<div className="row" key={index}>
-                          <div className="col-3">
+                        return (<div className="row pb-3" key={index}>
+                          <div className="col-2">
                             <span className="text-dark">{(index+1).toString()}.</span>
                           </div>
-                          <div className="col-6">
+                          <div className="col-5">
                             <span className="text-dark">{poll.pollName}</span>
                           </div>
-
+                          <div className="col-5">
+                            <button className="btn btn-primary" onClick={() => { props.setCurrentPoll(poll.pollName); props.dispatch({type: SHOW_POLL_PAGE}) }}> Show Poll</button>
+                          </div>
                         </div>)
                       })
                     }

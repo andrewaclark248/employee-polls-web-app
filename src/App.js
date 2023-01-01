@@ -5,17 +5,19 @@ import Home from './Home.js';
 import Login from './Login.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { connect } from "react-redux";
-import { LOGIN_PAGE, HOME_PAGE, NEW_POLL_PAGE } from "./redux/actions/changePageAction.js"
+import { LOGIN_PAGE, HOME_PAGE, NEW_POLL_PAGE, SHOW_POLL_PAGE } from "./redux/actions/changePageAction.js"
 import AppNavBar from './Navbar.js';
 import NewPoll from './NewPoll.js';
 import NotificationBox from './NotificationBox.js';
 import React, { useState } from 'react';
+import ShowPoll from './ShowPoll.js';
 
 
 
 
 function App(props) {
   let [show, setShow] = useState(false);
+  let [currentPoll, setCurrentPoll] = useState("");
 
   return (
     <div className="App">
@@ -31,19 +33,16 @@ function App(props) {
           <Login {...props}/>
         }
         {props.currentPage == HOME_PAGE &&
-          <Home {...props}/>
-        }  
+          <Home {...props} setCurrentPoll={setCurrentPoll}/>
+        }
         {props.currentPage == NEW_POLL_PAGE &&
           <NewPoll {...props} showNotificationBox={setShow}/>
+        }  
+        {props.currentPage == SHOW_POLL_PAGE &&
+          <ShowPoll currentPoll={currentPoll}/>
         }        
     </div>
   );
-}
-
-function showNotificationHandler(showNotification) {
-  //let [show, setShow] = useState(false);
- // setShow(showNotification)
-  return "show";
 }
 
 
