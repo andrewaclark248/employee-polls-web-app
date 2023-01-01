@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { SHOW_POLL_PAGE } from "./redux/actions/changePageAction.js"
+import { SHOW_POLL_PAGE, ANWSERED_POLL_PAGE} from "./redux/actions/changePageAction.js"
 
 function Home(props) {
   var userUnansweredPolls = null;
@@ -62,7 +62,7 @@ function Home(props) {
                             <span className="text-dark">{poll?.pollName}</span>
                           </div>
                           <div className="col-5">
-                            <button className="btn btn-primary" onClick={() => { props.setCurrentPoll(poll.pollName); props.dispatch({type: SHOW_POLL_PAGE}) }}> Show Poll</button>
+                            <button className="btn btn-primary" onClick={() => { props.setCurrentPoll(poll.pollName); props.dispatch({type: ANWSERED_POLL_PAGE}) }}> Show Poll</button>
                           </div>
                         </div>)
                       })
