@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
-import { loginUserReducer } from './loginUserReducer.js';
+import { loginUser } from './loginUser.js';
 import { changePage } from './changePage.js';
 
 
 const rootReducer = combineReducers({
-	changePage: changePage
+	changePage: changePage,
+	loginUser: loginUser
 })
 
 export default rootReducer;

@@ -5,7 +5,7 @@ const initialState = {
 	currentUser: "none"
 }
 
-export const loginUserReducer = (state = initialState, action) => {
+export const loginUser = (state = initialState, action) => {
 
 	switch(action.type){
 		case LOGIN_TYPE: 

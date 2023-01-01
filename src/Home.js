@@ -1,3 +1,4 @@
+import { connect } from "react-redux";
 
 function Home(props) {
 
@@ -9,5 +10,7 @@ function Home(props) {
     );
   }
   
-  export default Home;
   
+  export default connect((state) => ({
+    currentUser: state.loginUser.currentUser
+  }))(Home);
