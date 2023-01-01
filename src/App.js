@@ -8,15 +8,24 @@ import { connect } from "react-redux";
 import { LOGIN_PAGE, HOME_PAGE, NEW_POLL_PAGE } from "./redux/actions/changePageAction.js"
 import AppNavBar from './Navbar.js';
 import NewPoll from './NewPoll.js';
+import NotificationBox from './NotificationBox.js';
+import React, { useState } from 'react';
 
 
 
 
 function App(props) {
+  let [show, setShow] = useState(false);
+
   return (
     <div className="App">
         {props.currentPage != LOGIN_PAGE &&
-          <AppNavBar/>
+          <div className="pb-4">
+            <AppNavBar/>
+          </div>
+        }
+        {show &&
+          <NotificationBox showNotificationBox={setShow}/>
         }
         {props.currentPage == LOGIN_PAGE &&
           <Login {...props}/>
@@ -25,10 +34,16 @@ function App(props) {
           <Home {...props}/>
         }  
         {props.currentPage == NEW_POLL_PAGE &&
-          <NewPoll {...props}/>
+          <NewPoll {...props} showNotificationBox={setShow}/>
         }        
     </div>
   );
+}
+
+function showNotificationHandler(showNotification) {
+  //let [show, setShow] = useState(false);
+ // setShow(showNotification)
+  return "show";
 }
 
 
