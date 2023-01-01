@@ -13,8 +13,6 @@ import NewPoll from './NewPoll.js';
 
 
 function App(props) {
-  console.log("App page", props)
-  console.log(props.currentUser != undefined )
   return (
     <div className="App">
         {props.currentPage != LOGIN_PAGE &&
@@ -37,7 +35,8 @@ function App(props) {
 
 export default connect((state) => ({
 	currentPage: state.changePage.currentPage,
-	currentUser: state.loginUser.currentUSer
+	currentUser: state.loginUser.currentUser,
+	allPolls: state.polls.allPolls
 
 }))(App);
 
