@@ -1,7 +1,11 @@
 import { connect } from "react-redux";
 
 function Home(props) {
+    if (props.allPolls.length > 0) {
+      var result = unansweredPolls(props.allPolls, props.currentUser)
+      console.log(result)
 
+    }
     return (
       <div >
           <div className="bottom-padding">
@@ -29,14 +33,24 @@ function Home(props) {
                 </div>
               </div>
             </div>
-
             <div className="col-2"></div>
           </div>
       </div>
     );
   }
+
+
+  function unansweredPolls(allPolls, currentUser) {
+    var userAnansweredPolls = allPolls.map(function(poll) {
+      if (poll.currentUser == currentUser){
+        return poll;
+      }
+    });
+    return userAnansweredPolls
+  } 
   
   
   export default connect((state) => ({
-    currentUser: state.loginUser.currentUser
+    currentUser: state.loginUser.currentUser,
+    allPolls: state.polls.allPolls
   }))(Home);

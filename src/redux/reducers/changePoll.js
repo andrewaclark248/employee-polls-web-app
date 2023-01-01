@@ -13,7 +13,8 @@ export const changePoll = (state = initialState, action) => {
 		newPoll = {
 			currentUser: action.payload.currentUser,
 			firstOption: action.payload.firstOption,
-			secondOption: action.payload.secondOption
+			secondOption: action.payload.secondOption,
+			answer: "none"
 		}
 		var listOfPolls = state.allPolls.concat(newPoll)
 		var result = { ...state, allPolls: listOfPolls}
