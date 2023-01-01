@@ -39,7 +39,7 @@ function App(props) {
           <NewPoll {...props} showNotificationBox={setShow}/>
         }  
         {props.currentPage == SHOW_POLL_PAGE &&
-          <ShowPoll currentPoll={currentPoll}/>
+          <ShowPoll currentPoll={currentPoll} allPolls={props.allPolls}/>
         }        
     </div>
   );
