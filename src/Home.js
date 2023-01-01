@@ -27,7 +27,10 @@ function Home(props) {
                       userUnansweredPolls.map((poll, index) => {
                         return (<div className="row" key={index}>
                           <div className="col-3">
-                            <span className="text-dark">somse data ahahahahha</span>
+                            <span className="text-dark">{(index+1).toString()}.</span>
+                          </div>
+                          <div className="col-6">
+                            <span className="text-dark">{poll.pollName}</span>
                           </div>
 
                         </div>)
