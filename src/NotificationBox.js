@@ -8,7 +8,7 @@ function NotificationBox(props) {
 
         <Alert variant="danger" onClose={() => props.showNotificationBox(false)} dismissible>
           <span>
-            You added a new poll!
+            {props.alertText}
           </span>
         </Alert>
       );

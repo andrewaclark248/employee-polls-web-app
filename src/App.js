@@ -19,6 +19,7 @@ import AnwseredPoll from './AnwseredPoll.js';
 function App(props) {
   let [show, setShow] = useState(false);
   let [currentPoll, setCurrentPoll] = useState("");
+  let [alertText, setAlertText] = useState("");
 
   return (
     <div className="App">
@@ -28,7 +29,7 @@ function App(props) {
           </div>
         }
         {show &&
-          <NotificationBox showNotificationBox={setShow}/>
+          <NotificationBox showNotificationBox={setShow} alertText={alertText}/>
         }
         {props.currentPage == LOGIN_PAGE &&
           <Login {...props}/>
@@ -37,13 +38,13 @@ function App(props) {
           <Home {...props} setCurrentPoll={setCurrentPoll}/>
         }
         {props.currentPage == NEW_POLL_PAGE &&
-          <NewPoll {...props} showNotificationBox={setShow}/>
+          <NewPoll {...props} showNotificationBox={setShow} setAlertText={setAlertText}/>
         }  
         {props.currentPage == SHOW_POLL_PAGE &&
-          <ShowPoll currentPoll={currentPoll} allPolls={props.allPolls}/>
+          <ShowPoll currentPoll={currentPoll} allPolls={props.allPolls} showNotificationBox={setShow} setAlertText={setAlertText}/>
         }
         {props.currentPage == ANWSERED_POLL_PAGE &&
-          <AnwseredPoll currentPoll={currentPoll} {...props} />
+          <AnwseredPoll currentPoll={currentPoll}  {...props} />
         }      
     </div>
   );

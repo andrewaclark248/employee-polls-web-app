@@ -10,7 +10,6 @@ function NewPoll(props) {
   var [secondOption, setSecondOption] = useState("");
   var [pollName, setpollName] = useState("");
 
-  //console.log("firstOption = " + firstOption);
     return (
     <div >
         <h1 className="bottom-padding">New Poll</h1>
@@ -35,7 +34,7 @@ function NewPoll(props) {
                             <input className="form-control" placeholder="Second Option" onChange={(e) => { setSecondOption(e.target.value) }} />
                         </div>
                         <div className="pb-2">
-                            <button className="btn btn-primary" onClick={() => { props.showNotificationBox(true); props.dispatch({type: NEW_POLL_TYPE, payload: {firstOption: firstOption, secondOption: secondOption, currentUser: props.currentUser, pollName: pollName} })}}>Create Poll</button>
+                            <button className="btn btn-primary" onClick={() => { props.setAlertText("You created a New Poll!!!"); props.showNotificationBox(true); props.dispatch({type: NEW_POLL_TYPE, payload: {firstOption: firstOption, secondOption: secondOption, currentUser: props.currentUser, pollName: pollName} })}}>Create Poll</button>
                         </div>
                     </div>
                 </div>

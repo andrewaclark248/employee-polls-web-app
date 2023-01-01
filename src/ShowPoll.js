@@ -42,7 +42,7 @@ function ShowPoll(props) {
                                 <Select options={options} onChange={(e) => setPollChoice(e.value)} />
                             </div>
                             <div className="pb-3">
-                                <button className="btn btn-primary" onClick={() => { anwserPoll(pollChoice, props, getPoll.pollName) }}>Update Poll</button>
+                                <button className="btn btn-primary" onClick={() => { props.setAlertText("You updated your Poll!"); props.showNotificationBox(true); anwserPoll(pollChoice, props, getPoll.pollName) }}>Update Poll</button>
                             </div>
                         </div>
                     </div>
