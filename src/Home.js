@@ -42,7 +42,7 @@ function Home(props) {
 
   function unansweredPolls(allPolls, currentUser) {
     var userAnansweredPolls = allPolls.map(function(poll) {
-      if (poll.currentUser == currentUser){
+      if ((poll.currentUser == currentUser) && (poll.answer == "none")){
         return poll;
       }
     });
