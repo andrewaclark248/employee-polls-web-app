@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import { loginUserReducer } from './loginUserReducer.js';
+import { changePage } from './changePage.js';
+
 
 const rootReducer = combineReducers({
-	loginUser: loginUserReducer
+	changePage: changePage
 })
 
 export default rootReducer;

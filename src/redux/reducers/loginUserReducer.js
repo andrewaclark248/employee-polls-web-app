@@ -6,7 +6,6 @@ const initialState = {
 }
 
 export const loginUserReducer = (state = initialState, action) => {
-	console.log("reducer action", action)
 
 	switch(action.type){
 		case LOGIN_TYPE: 

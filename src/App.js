@@ -4,23 +4,33 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './Home.js';
 import Login from './Login.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { connect } from "react-redux";
+import { LOGIN_PAGE, HOME_PAGE } from "./redux/actions/changePageAction.js"
+
 
 
 
 function App(props) {
-  console.log("App ====", props)
+  console.log("App page", props)
+
   return (
     <div className="App">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/">
-              <Route index element={<Login />} />
-              <Route path="home" element={<Home {...props}/>} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+        {props.currentPage == LOGIN_PAGE &&
+          <Login {...props}/>
+        }
+        {props.currentPage == HOME_PAGE &&
+          <Home {...props}/>
+        }
+        
     </div>
   );
 }
 
-export default App;
+
+
+export default connect((state) => ({
+	currentPage: state.changePage.currentPage
+}))(App);
+
+
+

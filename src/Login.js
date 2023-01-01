@@ -2,7 +2,7 @@ import Select from 'react-select'
 import './App.css'
 import { connect } from "react-redux";
 import { LOGIN_TYPE } from "./redux/actions/loginUserAction.js"
-import { Link } from "react-router-dom";
+import { LOGIN_PAGE, HOME_PAGE } from "./redux/actions/changePageAction.js"
 
 const options = [
     { value: 'john-doe', label: 'John Doe' },
@@ -11,6 +11,7 @@ const options = [
   ]
 
 function Login(props) {
+  console.log("Login page", props)
     return (
     <div >
         <h1 className="bottom-padding">Login Page</h1>
@@ -24,18 +25,21 @@ function Login(props) {
             </div>
             <div className="col-4"></div>
         </div>
-        <Link to="/home" className="btn btn-primary">Login</Link>
+        <button className="btn btn-primary" onClick={() => { props.dispatch({type: HOME_PAGE })}}>Login</button>
       </div>
     );
   }
 
 const mapStateToProps = state => {
 	return {
-		currentUser: state.loginUser.currentUser
-	}
+		currentPage: state.currentPage
+
+  }
 }
 
-export default connect(mapStateToProps)(Login);
+export default connect((state) => ({
+	currentPage: state.changePage.currentPage
+}))(Login);
 
 
   
