@@ -8,6 +8,8 @@ import { NEW_POLL_TYPE } from "./redux/actions/pollActions.js"
 function NewPoll(props) {
   var [firstOption, setFirstOption] = useState("");
   var [secondOption, setSecondOption] = useState("");
+  var [pollName, setpollName] = useState("");
+
   //console.log("firstOption = " + firstOption);
     return (
     <div >
@@ -21,6 +23,10 @@ function NewPoll(props) {
                     <div className="card-body">
                         <h5 className="card-title pb-4">Would You Rather?</h5>
                         <div className="pb-3">
+                            <label className="">Poll Name</label>
+                            <input className="form-control" placeholder="Poll Name" onChange={(e) => { setpollName(e.target.value) }} />
+                        </div>
+                        <div className="pb-3">
                             <label className="">First Option</label>
                             <input className="form-control" placeholder="First Option" onChange={(e) => { setFirstOption(e.target.value) }} />
                         </div>
@@ -29,7 +35,7 @@ function NewPoll(props) {
                             <input className="form-control" placeholder="Second Option" onChange={(e) => { setSecondOption(e.target.value) }} />
                         </div>
                         <div className="pb-2">
-                            <button className="btn btn-primary" onClick={() => { props.showNotificationBox(true); props.dispatch({type: NEW_POLL_TYPE, payload: {firstOption: firstOption, secondOption: secondOption, currentUser: props.currentUser} })}}>Create Poll</button>
+                            <button className="btn btn-primary" onClick={() => { props.showNotificationBox(true); props.dispatch({type: NEW_POLL_TYPE, payload: {firstOption: firstOption, secondOption: secondOption, currentUser: props.currentUser, pollName: pollName} })}}>Create Poll</button>
                         </div>
                     </div>
                 </div>
