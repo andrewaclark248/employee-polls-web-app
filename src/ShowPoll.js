@@ -1,11 +1,11 @@
 import Select from 'react-select'
 import { useState } from 'react';
 import { UPDATE_POLL_TYPE } from "./redux/actions/pollActions.js"
+import { connect } from "react-redux";
 
 
 function ShowPoll(props) {
     var [pollChoice, setPollChoice] = useState("");
-
     let getPoll = props.allPolls.filter((poll) => {
         return poll.pollName == props.currentPoll
     })[0]
@@ -15,7 +15,6 @@ function ShowPoll(props) {
         { value: getPoll.secondOption, label: getPoll.secondOption }
       ]
 
-    console.log(pollChoice)
     return (
         <div>
             <h1 className="bottom-padding">New Poll</h1>
@@ -42,7 +41,7 @@ function ShowPoll(props) {
                             <div className="pb-3">
                                 <Select options={options} onChange={(e) => setPollChoice(e.value)} />
                             </div>
-                            <div class="pb-3">
+                            <div className="pb-3">
                                 <button className="btn btn-primary" onClick={() => { anwserPoll(pollChoice, props, getPoll.pollName) }}>Update Poll</button>
                             </div>
                         </div>
@@ -59,8 +58,8 @@ function ShowPoll(props) {
 //validation
 function anwserPoll(pollChoice, props, pollName) {
     if (pollChoice != "") {
-        props.dispatch({type: UPDATE_POLL_TYPE, payload: {pollChoice: pollName, anwser: pollChoice}})
+        props.dispatch({type: UPDATE_POLL_TYPE, payload: {pollName: pollName, pollChoice: pollChoice}})
     }
 }
 
-export default ShowPoll;
+export default connect(null, null)(ShowPoll);
