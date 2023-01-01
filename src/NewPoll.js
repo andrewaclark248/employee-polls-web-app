@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { useState } from 'react';
 import { NEW_POLL_TYPE } from "./redux/actions/pollActions.js"
 
+import { HOME_PAGE } from "./redux/actions/changePageAction.js"
+
 
 function NewPoll(props) {
   var [firstOption, setFirstOption] = useState("");
@@ -34,7 +36,7 @@ function NewPoll(props) {
                             <input className="form-control" placeholder="Second Option" onChange={(e) => { setSecondOption(e.target.value) }} />
                         </div>
                         <div className="pb-2">
-                            <button className="btn btn-primary" onClick={() => { props.setAlertText("You created a New Poll!!!"); props.showNotificationBox(true); props.dispatch({type: NEW_POLL_TYPE, payload: {firstOption: firstOption, secondOption: secondOption, currentUser: props.currentUser, pollName: pollName} })}}>Create Poll</button>
+                            <button className="btn btn-primary" onClick={() => { props.setAlertText("You created a New Poll!!!"); props.showNotificationBox(true); props.dispatch({type: NEW_POLL_TYPE, payload: {firstOption: firstOption, secondOption: secondOption, currentUser: props.currentUser, pollName: pollName} });  props.dispatch({type: HOME_PAGE });}}>Create Poll</button>
                         </div>
                     </div>
                 </div>
@@ -62,3 +64,6 @@ export default connect((state) => ({
 //(state) => ({
  //   goals: state.goals,
  // })
+
+
+ //props.dispatch({type: HOME_PAGE })

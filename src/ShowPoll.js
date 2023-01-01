@@ -2,6 +2,7 @@ import Select from 'react-select'
 import { useState } from 'react';
 import { UPDATE_POLL_TYPE } from "./redux/actions/pollActions.js"
 import { connect } from "react-redux";
+import { HOME_PAGE } from "./redux/actions/changePageAction.js"
 
 
 function ShowPoll(props) {
@@ -42,7 +43,7 @@ function ShowPoll(props) {
                                 <Select options={options} onChange={(e) => setPollChoice(e.value)} />
                             </div>
                             <div className="pb-3">
-                                <button className="btn btn-primary" onClick={() => { props.setAlertText("You updated your Poll!"); props.showNotificationBox(true); anwserPoll(pollChoice, props, getPoll.pollName) }}>Update Poll</button>
+                                <button className="btn btn-primary" onClick={() => { props.setAlertText("You updated your Poll!"); props.showNotificationBox(true); anwserPoll(pollChoice, props, getPoll.pollName); props.dispatch({type: HOME_PAGE }) }}>Update Poll</button>
                             </div>
                         </div>
                     </div>
