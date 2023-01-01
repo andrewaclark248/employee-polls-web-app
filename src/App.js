@@ -43,7 +43,7 @@ function App(props) {
           <ShowPoll currentPoll={currentPoll} allPolls={props.allPolls}/>
         }
         {props.currentPage == ANWSERED_POLL_PAGE &&
-          <AnwseredPoll {...props} />
+          <AnwseredPoll currentPoll={currentPoll} {...props} />
         }      
     </div>
   );

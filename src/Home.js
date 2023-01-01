@@ -90,7 +90,6 @@ function Home(props) {
 
   function awnseredPolls (allPolls, currentUser) {
     var userAnsweredPolls = allPolls.filter(function(poll) {
-      console.log("poll awnser = " + poll.answer)
       if ((poll.currentUser == currentUser) && (poll.answer != "none")){
         return poll;
       }
