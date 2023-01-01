@@ -11,7 +11,6 @@ const options = [
   ]
 
 function Login(props) {
-  console.log("Login page", props)
     return (
     <div >
         <h1 className="bottom-padding">Login Page</h1>
