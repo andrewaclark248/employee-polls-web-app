@@ -11,6 +11,7 @@ export const changePoll = (state = initialState, action) => {
 
 	if (action.type == NEW_POLL_TYPE) {
 		newPoll = {
+			pollName: action.payload.pollName,
 			currentUser: action.payload.currentUser,
 			firstOption: action.payload.firstOption,
 			secondOption: action.payload.secondOption,

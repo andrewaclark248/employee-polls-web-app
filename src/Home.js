@@ -1,11 +1,12 @@
 import { connect } from "react-redux";
 
 function Home(props) {
+  var userUnansweredPolls = null;
     if (props.allPolls.length > 0) {
-      var result = unansweredPolls(props.allPolls, props.currentUser)
-      console.log(result)
-
+      userUnansweredPolls = unansweredPolls(props.allPolls, props.currentUser)
+      console.log(userUnansweredPolls)
     }
+    
     return (
       <div >
           <div className="bottom-padding">
@@ -20,7 +21,10 @@ function Home(props) {
               <div className="card" >
                 <div className="card-header text-white bg-primary">Unawnsered Polls</div>
                 <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
+                  <div className="">
+
+
+                  </div>
                 </div>
               </div>
             </div>
