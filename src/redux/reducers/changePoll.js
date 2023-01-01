@@ -1,4 +1,4 @@
-import { NEW_POLL_TYPE } from '../actions/pollActions.js';
+import { NEW_POLL_TYPE, UPDATE_POLL_TYPE } from '../actions/pollActions.js';
 
 
 const initialState = {
@@ -21,6 +21,8 @@ export const changePoll = (state = initialState, action) => {
 		var result = { ...state, allPolls: listOfPolls}
 		//console.log("changePoll.js = ", returnVar)
 		return result;
+	} else if (action.type == UPDATE_POLL_TYPE) {
+		console.log(state)
 	} else {
 		return state;
 	}
