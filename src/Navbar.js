@@ -10,7 +10,7 @@ import { LOGIN_PAGE, HOME_PAGE, NEW_POLL_PAGE } from "./redux/actions/changePage
 function AppNavBar(props) {
 
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="light" expand="lg" >
           <Navbar.Brand href="#home" className="text-primary fw-bold " style={{paddingLeft: "20px", paddingRight: "20px"}} disabled={true}>
             Employee Poll App
           </Navbar.Brand>
