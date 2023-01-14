@@ -15,7 +15,8 @@ export const changePoll = (state = initialState, action) => {
 			currentUser: action.payload.currentUser,
 			firstOption: action.payload.firstOption,
 			secondOption: action.payload.secondOption,
-			answer: "none"
+			answer: "none",
+			createdAt: new Date().toLocaleString()
 		}
 		var listOfPolls = state.allPolls.concat(newPoll)
 		var result = { ...state, allPolls: listOfPolls}
