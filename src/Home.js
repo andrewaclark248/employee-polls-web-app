@@ -9,12 +9,13 @@ function Home(props) {
       userAnwseredPolls = awnseredPolls(props.allPolls, props.currentUser)
     }
     //console.log(userAnwseredPolls)
+    var userName = getUserNamePretty(props.currentUser)
 
     return (
       <div>
           <div className="bottom-padding">
             <h1>Home Page</h1>
-            <span>Current User: {props.currentUser}</span>
+            <span>Current User: {userName}</span>
           </div>
 
           <div className="row">
@@ -95,6 +96,13 @@ function Home(props) {
       }
     });
     return userAnsweredPolls;
+  }
+
+  function getUserNamePretty(currentUser) {
+    var firstName = currentUser.split("-")[0]
+    var lastName = currentUser.split("-")[1]
+    var name = firstName + " " + lastName
+    return name;
   }
   
   
