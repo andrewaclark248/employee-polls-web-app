@@ -8,8 +8,14 @@ function Home(props) {
       userUnansweredPolls = unansweredPolls(props.allPolls, props.currentUser)
       userAnwseredPolls = awnseredPolls(props.allPolls, props.currentUser)
     }
-    //console.log(userAnwseredPolls)
+    //pretty user name
     var userName = getUserNamePretty(props.currentUser)
+
+    //sort unawnsered polls
+    let sortedUserUnansweredPolls = userUnansweredPolls?.sort((a, b) =>  {return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()})
+    
+    //sort awnsered polls
+    let sortedUserAnwseredPolls = userAnwseredPolls?.sort((a, b) =>  {return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()})
 
     return (
       <div>
@@ -27,8 +33,8 @@ function Home(props) {
                 <div className="card-body">
 
                   <div className="">
-                    {userUnansweredPolls != null && userUnansweredPolls[0] != undefined &&
-                      userUnansweredPolls.map((poll, index) => {
+                    {sortedUserUnansweredPolls != null && sortedUserUnansweredPolls[0] != undefined &&
+                      sortedUserUnansweredPolls.map((poll, index) => {
                         return (<div className="row pb-3" key={index}>
                           <div className="col-2">
                             <span className="text-dark">{(index+1).toString()}.</span>
@@ -53,8 +59,8 @@ function Home(props) {
                 <div className="card-body">
 
                   <div className="">
-                    {userAnwseredPolls != null && userAnwseredPolls[0] != undefined &&
-                      userAnwseredPolls.map((poll, index) => {
+                    {sortedUserAnwseredPolls != null && sortedUserAnwseredPolls[0] != undefined &&
+                      sortedUserAnwseredPolls.map((poll, index) => {
                         return (<div className="row pb-3" key={index}>
                           <div className="col-2">
                             <span className="text-dark">{(index+1).toString()}.</span>
