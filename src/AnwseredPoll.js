@@ -17,6 +17,10 @@ function AnwseredPoll(props) {
                         </div>
                         <div className="card-body">
                             <div className="pb-5">
+                                <label className="">Poll ID</label>
+                                <input className="form-control"  disabled={true} value={getPoll.id}/>
+                            </div>
+                            <div className="pb-5">
                                 <label className="">Poll Name</label>
                                 <input className="form-control"  disabled={true} value={getPoll.pollName}/>
                             </div>

@@ -13,7 +13,7 @@ function ShowPoll(props) {
     let getPoll = props.allPolls.filter((poll) => {
         return poll.pollName == props.currentPoll
     })[0]
-
+    console.log(getPoll)
     let options = [
         { value: getPoll.firstOption, label: getPoll.firstOption },
         { value: getPoll.secondOption, label: getPoll.secondOption }
@@ -30,6 +30,10 @@ function ShowPoll(props) {
                             Answer Poll
                         </div>
                         <div className="card-body">
+                            <div className="pb-3">
+                                <label className="">Poll ID</label>
+                                <input className="form-control"  disabled={true} value={getPoll.id}/>
+                            </div>
                             <div className="pb-3">
                                 <label className="">Poll Name</label>
                                 <input className="form-control"  disabled={true} value={getPoll.pollName}/>

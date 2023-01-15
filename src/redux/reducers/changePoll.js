@@ -1,5 +1,5 @@
 import { NEW_POLL_TYPE, UPDATE_POLL_TYPE } from '../actions/pollActions.js';
-
+import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
 	allPolls: []
@@ -9,8 +9,10 @@ export const changePoll = (state = initialState, action) => {
 	var newPoll = null;
 	var returnVar = null;
 
+
 	if (action.type == NEW_POLL_TYPE) {
 		newPoll = {
+			id: uuidv4(),
 			pollName: action.payload.pollName,
 			currentUser: action.payload.currentUser,
 			firstOption: action.payload.firstOption,
