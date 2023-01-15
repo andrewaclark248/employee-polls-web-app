@@ -18,8 +18,8 @@ function AppNavBar(props) {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Link className="active fw-bold" to="/home" style={{textDecoration: "none", color: "black", paddingRight: 10 }}>Home</Link>
-              <Link className="active fw-bold" to="/new-poll" style={{textDecoration: "none", color: "black", paddingRight: 10 }}>New Poll</Link>
-              <Link className="active fw-bold" to="/new-poll" style={{textDecoration: "none", color: "black", paddingRight: 10 }}>LeaderBoard</Link>
+              <Link className="active fw-bold" to="/add" style={{textDecoration: "none", color: "black", paddingRight: 10 }}>New Poll</Link>
+              <Link className="active fw-bold" to="/add" style={{textDecoration: "none", color: "black", paddingRight: 10 }}>LeaderBoard</Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>

@@ -45,7 +45,7 @@ function App2(props) {
                   </React.Fragment>
                 } />
 
-                <Route path="new-poll" element={
+                <Route path="add" element={
                   <React.Fragment>
                     <AppNavBar />
                     <NewPoll {...props} showNotificationBox={setShow} setAlertText={setAlertText}/>
