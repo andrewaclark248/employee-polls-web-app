@@ -54,6 +54,21 @@ function App2(props) {
                   </React.Fragment>
                 } />
 
+                <Route path="awnsered-poll" element={
+                  <React.Fragment>
+                    <AppNavBar />
+                    <AnwseredPoll currentPoll={currentPoll} {...props} />
+                  </React.Fragment>
+                } />
+
+
+                <Route path="show-poll" element={
+                  <React.Fragment>
+                    <AppNavBar />
+                    <ShowPoll currentPoll={currentPoll} allPolls={props.allPolls} showNotificationBox={setShow} setAlertText={setAlertText}/>
+                  </React.Fragment>
+                } />
+
               </Route>
 
             </Routes>
@@ -62,7 +77,7 @@ function App2(props) {
     )
 
 }
-
+//
 
 export default connect((state) => ({
 	currentPage: state.changePage.currentPage,

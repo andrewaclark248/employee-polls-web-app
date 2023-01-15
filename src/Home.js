@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { SHOW_POLL_PAGE, ANWSERED_POLL_PAGE} from "./redux/actions/changePageAction.js"
 import AppNavBar from './Navbar.js';
+import { useNavigate } from 'react-router-dom';
 
 function Home(props) {
   var userUnansweredPolls = null;
@@ -17,6 +18,8 @@ function Home(props) {
     
     //sort awnsered polls
     let sortedUserAnwseredPolls = userAnwseredPolls?.sort((a, b) =>  {return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()})
+    
+    const navigate = useNavigate();
 
     return (
       <div>
@@ -46,7 +49,7 @@ function Home(props) {
                             <span className="text-dark">{poll?.pollName}</span>
                           </div>
                           <div className="col-5">
-                            <button className="btn btn-primary" onClick={() => { props.setCurrentPoll(poll.pollName); props.dispatch({type: SHOW_POLL_PAGE}) }}> Show Poll</button>
+                            <button className="btn btn-primary" onClick={() => { props.setCurrentPoll(poll.pollName); navigate('/show-poll'); }}> Show Poll</button>
                           </div>
                         </div>)
                       })
@@ -72,7 +75,7 @@ function Home(props) {
                             <span className="text-dark">{poll?.pollName}</span>
                           </div>
                           <div className="col-5">
-                            <button className="btn btn-primary" onClick={() => { props.setCurrentPoll(poll.pollName); props.dispatch({type: ANWSERED_POLL_PAGE}) }}> Show Poll</button>
+                            <button className="btn btn-primary" onClick={() => { props.setCurrentPoll(poll.pollName); navigate('/awnsered-poll'); }}> Show Poll</button>
                           </div>
                         </div>)
                       })
