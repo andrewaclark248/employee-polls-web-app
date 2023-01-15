@@ -3,26 +3,27 @@ import Container from 'react-bootstrap';
 //import Nav from 'react-bootstrap';
 import { Navbar, Nav } from 'react-bootstrap';
 //import NavDropdown from 'react-bootstrap';
-import { Link }  from "react-router-dom"
-import { LOGIN_PAGE, HOME_PAGE, NEW_POLL_PAGE } from "./redux/actions/changePageAction.js"
+import { Link } from "react-router-dom";
 
 
 function AppNavBar(props) {
 
     return (
+      <div style={{paddingBottom: 30}}>
         <Navbar bg="light" expand="lg" >
-          <Navbar.Brand href="#home" className="text-primary fw-bold " style={{paddingLeft: "20px", paddingRight: "20px"}} disabled={true}>
+          <Navbar.Brand className="text-primary fw-bold " style={{paddingLeft: "20px", paddingRight: "20px"}} disabled={true}>
             Employee Poll App
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home" className="active fw-bold" onClick={() => { props.dispatch({type: HOME_PAGE })}}>Home</Nav.Link>
-              <Nav.Link href="#link" className="active fw-bold" onClick={() => { props.dispatch({type: NEW_POLL_PAGE })}}>New Poll</Nav.Link>
-              <Nav.Link href="#link" className="active fw-bold">Leader Board</Nav.Link>
+              <Link className="active fw-bold" to="/home" style={{textDecoration: "none", color: "black", paddingRight: 10 }}>Home</Link>
+              <Link className="active fw-bold" to="/new-poll" style={{textDecoration: "none", color: "black", paddingRight: 10 }}>New Poll</Link>
+              <Link className="active fw-bold" to="/new-poll" style={{textDecoration: "none", color: "black", paddingRight: 10 }}>LeaderBoard</Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
+      </div>
     );
   }
   

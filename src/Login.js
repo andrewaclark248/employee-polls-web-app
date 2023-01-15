@@ -3,6 +3,8 @@ import './App.css'
 import { connect } from "react-redux";
 import { LOGIN_TYPE } from "./redux/actions/loginUserAction.js"
 import { LOGIN_PAGE, HOME_PAGE } from "./redux/actions/changePageAction.js"
+import { Link } from "react-router-dom";
+
 
 const options = [
     { value: 'john-doe', label: 'John Doe' },
@@ -12,11 +14,13 @@ const options = [
 
 function Login(props) {
     return (
-    <div >
-        <h1 className="bottom-padding">Login Page</h1>
-        <div className="pb-3">
-            <span>Select User To Login As</span>
-        </div>
+    <div>
+        <center>
+          <h1 className="bottom-padding">Login Page</h1>
+          <div className="pb-3">
+              <span>Select User To Login As</span>
+          </div>
+        </center>
         <div className="row pb-5">
             <div className="col-4"></div>
             <div className="col-4">
@@ -24,7 +28,9 @@ function Login(props) {
             </div>
             <div className="col-4"></div>
         </div>
-        <button className="btn btn-primary" onClick={() => { props.dispatch({type: HOME_PAGE })}}>Login</button>
+        <center>
+          <Link className="btn btn-primary" to="home">Login</Link>
+        </center>
       </div>
     );
   }

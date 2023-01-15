@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import { SHOW_POLL_PAGE, ANWSERED_POLL_PAGE} from "./redux/actions/changePageAction.js"
+import AppNavBar from './Navbar.js';
 
 function Home(props) {
   var userUnansweredPolls = null;
@@ -19,10 +20,12 @@ function Home(props) {
 
     return (
       <div>
-          <div className="bottom-padding">
-            <h1>Home Page</h1>
-            <span>Current User: {userName}</span>
-          </div>
+          <center>
+            <div className="bottom-padding">
+              <h1>Home Page</h1>
+              <span>Current User: {userName}</span>
+            </div>
+          </center>
 
           <div className="row">
             <div className="col-2"></div>
