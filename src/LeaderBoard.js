@@ -1,8 +1,7 @@
-
+import { allUsers } from "./allUsers";
 
 export default function LeaderBoard(props) {
 
-    const allUsers = ['john-doe', 'jane-doe', 'batman-robin']
 
     return (
         <div>
@@ -18,7 +17,7 @@ export default function LeaderBoard(props) {
                     <div className="card" >
                         <div className="card-header text-white bg-primary">Leader Board</div>
                         <div className="card-body">
-                            <table class="table">
+                            <table className="table">
                                 <thead>
                                     <tr>
                                     <th>UserName</th>

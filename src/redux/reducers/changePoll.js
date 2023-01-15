@@ -1,8 +1,11 @@
 import { NEW_POLL_TYPE, UPDATE_POLL_TYPE } from '../actions/pollActions.js';
 import { v4 as uuidv4 } from 'uuid';
+import { allUsers } from '../../allUsers.js';
+
 
 const initialState = {
-	allPolls: []
+	originalPolls: [],
+	userPolls: []
 }
 
 export const changePoll = (state = initialState, action) => {
@@ -11,18 +14,21 @@ export const changePoll = (state = initialState, action) => {
 
 
 	if (action.type == NEW_POLL_TYPE) {
+
+		let pollId = uuidv4();
+		let createdUserPolls = createPollForEachUser(state, action, pollId)
 		newPoll = {
-			id: uuidv4(),
+			id: pollId,
 			pollName: action.payload.pollName,
 			currentUser: action.payload.currentUser,
 			firstOption: action.payload.firstOption,
 			secondOption: action.payload.secondOption,
-			answer: "none",
+			//answer: "cant-have-answer",
 			createdAt: new Date().toLocaleString()
 		}
-		var listOfPolls = state.allPolls.concat(newPoll)
-		var result = { ...state, allPolls: listOfPolls}
-		//console.log("changePoll.js = ", returnVar)
+		var listOfPolls = state.originalPolls.concat(newPoll)
+		var result = { ...state, originalPolls: listOfPolls, userPolls: createdUserPolls}
+
 		return result;
 	} else if (action.type == UPDATE_POLL_TYPE) {
 		var updatedPoll = state.allPolls.filter((poll) => {
@@ -50,4 +56,22 @@ export const changePoll = (state = initialState, action) => {
 			}
 		default: return state
 	}****/
+}
+
+function createPollForEachUser(state, action, pollId) {
+	let userPolls = []
+	allUsers.map((user) => {
+		let newPoll = {
+			currentUser: user,
+			originalPollId: pollId,
+			id: uuidv4(),
+			pollName: action.payload.pollName,
+			firstOption: action.payload.firstOption,
+			secondOption: action.payload.secondOption,
+			answer: "none",
+			createdAt: new Date().toLocaleString()
+		}
+		userPolls.push(newPoll)
+	})
+	return userPolls;
 }
