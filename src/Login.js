@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const options = [
     { value: 'john-doe', label: 'John Doe' },
     { value: 'jane-doe', label: 'Jane Doe' },
-    { value: 'batman', label: 'Batman' }
+    { value: 'batman-robin', label: 'Batman' }
   ]
 
 function Login(props) {
@@ -34,13 +34,6 @@ function Login(props) {
       </div>
     );
   }
-
-const mapStateToProps = state => {
-	return {
-		currentPage: state.currentPage
-
-  }
-}
 
 export default connect((state) => ({
 	currentPage: state.changePage.currentPage

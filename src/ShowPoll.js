@@ -18,10 +18,19 @@ function ShowPoll(props) {
         { value: getPoll.firstOption, label: getPoll.firstOption },
         { value: getPoll.secondOption, label: getPoll.secondOption }
       ]
-
+    var picture = getAvatar(props.currentUser)
+    //var picturePath = require("./assets/avatar-3-female.jpg")
     return (
         <div>
-            <h1 className="bottom-padding">New Poll</h1>
+            <h1 className="">New Poll</h1>
+            <div className="row bottom-padding">
+            <div className="col-4"></div>
+            <div className="col-4">
+                <span>Current User: <span className='fw-bold'>{getUserNamePretty(props.currentUser)}</span></span>
+                <img src={picture} height={100} width={100} />
+            </div>
+            <div className="col-4"></div>
+            </div>
             <div className="row">
                 <div className="col-3"></div>
                 <div className="col-6">
@@ -70,4 +79,30 @@ function anwserPoll(pollChoice, props, pollName) {
     }
 }
 
-export default connect(null, null)(ShowPoll);
+function getUserNamePretty(currentUser) {
+    var firstName = currentUser.split("-")[0]
+    var lastName = currentUser.split("-")[1]
+    var name = firstName + " " + lastName
+    return name;
+}
+
+function getAvatar(currentUser) {
+    var file = null
+    if (currentUser == "jane-doe") {
+        file = require("./assets/avatar-3-female.jpg")
+    } else if(currentUser == "john-doe") {
+        file = require("./assets/avatar-2-male.jpg")
+    } else if (currentUser == "batman") {
+        file = require("./assets/avatar-1-male.jpg")
+    } else {
+        file = require("./assets/none.jpg")
+    }
+    return file;
+}
+  
+
+export default connect((state) => ({
+    currentUser: state.loginUser.currentUser
+}), null)(ShowPoll);
+
+

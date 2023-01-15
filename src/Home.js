@@ -19,6 +19,9 @@ function Home(props) {
     //sort awnsered polls
     let sortedUserAnwseredPolls = userAnwseredPolls?.sort((a, b) =>  {return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()})
     
+    //get avatar
+    var picture = getAvatar(props.currentUser)
+
     const navigate = useNavigate();
 
     return (
@@ -27,6 +30,8 @@ function Home(props) {
             <div className="bottom-padding">
               <h1>Home Page</h1>
               <span>Current User: {userName}</span>
+              <img src={picture} height={100} width={100} />
+
             </div>
           </center>
 
@@ -116,6 +121,22 @@ function Home(props) {
     var name = firstName + " " + lastName
     return name;
   }
+
+
+function getAvatar(currentUser) {
+  var file = null
+  if (currentUser == "jane-doe") {
+      file = require("./assets/avatar-3-female.jpg")
+  } else if(currentUser == "john-doe") {
+      file = require("./assets/avatar-2-male.jpg")
+  } else if (currentUser == "batman") {
+      file = require("./assets/avatar-1-male.jpg")
+  } else {
+      file = require("./assets/none.jpg")
+  }
+  return file;
+}
+
   
   
   export default connect((state) => ({
