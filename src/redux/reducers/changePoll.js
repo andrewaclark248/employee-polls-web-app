@@ -17,6 +17,8 @@ export const changePoll = (state = initialState, action) => {
 
 		let pollId = uuidv4();
 		let createdUserPolls = createPollForEachUser(state, action, pollId)
+		var listOfUserPolls = state.userPolls.concat(createdUserPolls)
+
 		newPoll = {
 			id: pollId,
 			pollName: action.payload.pollName,
@@ -27,7 +29,7 @@ export const changePoll = (state = initialState, action) => {
 			createdAt: new Date().toLocaleString()
 		}
 		var listOfPolls = state.originalPolls.concat(newPoll)
-		var result = { ...state, originalPolls: listOfPolls, userPolls: createdUserPolls}
+		var result = { ...state, originalPolls: listOfPolls, userPolls: listOfUserPolls}
 
 		return result;
 	} else if (action.type == UPDATE_POLL_TYPE) {

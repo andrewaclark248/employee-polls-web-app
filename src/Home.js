@@ -4,16 +4,17 @@ import AppNavBar from './Navbar.js';
 import { useNavigate } from 'react-router-dom';
 
 function Home(props) { 
-  /** 
+  
     var userUnansweredPolls = null;
     var userAnwseredPolls = null;
-    if (props.allPolls.length > 0) {
-      userUnansweredPolls = unansweredPolls(props.allPolls, props.currentUser)
-      userAnwseredPolls = awnseredPolls(props.allPolls, props.currentUser)
+    if (props.userPolls?.length > 0) {
+      userUnansweredPolls = unansweredPolls(props.userPolls, props.currentUser)
+      //userAnwseredPolls = awnseredPolls(props.allPolls, props.currentUser)
     }
-
-    //sort unawnsered polls
     let sortedUserUnansweredPolls = userUnansweredPolls?.sort((a, b) =>  {return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()})
+
+    /** 
+    //sort unawnsered polls
     
     //sort awnsered polls
     let sortedUserAnwseredPolls = userAnwseredPolls?.sort((a, b) =>  {return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()})
@@ -21,9 +22,6 @@ function Home(props) {
 
 
     */
-
-    console.log("orignalPolls", props.originalPolls);
-    console.log("userPolls", props.userPolls);
 
     //pretty user name
     var userName = getUserNamePretty(props.currentUser)
@@ -51,7 +49,21 @@ function Home(props) {
                 <div className="card-body">
 
                   <div className="">
-
+                    {sortedUserUnansweredPolls != null && sortedUserUnansweredPolls[0] != undefined &&
+                        sortedUserUnansweredPolls.map((poll, index) => {
+                          return (<div className="row pb-3" key={index}>
+                            <div className="col-2">
+                              <span className="text-dark">{(index+1).toString()}.</span>
+                            </div>
+                            <div className="col-5">
+                              <span className="text-dark">{poll?.pollName}</span>
+                            </div>
+                            <div className="col-5">
+                              <button className="btn btn-primary" onClick={() => { props.setCurrentPoll(poll.pollName); navigate('/show-poll'); }}> Show Poll</button>
+                            </div>
+                          </div>)
+                        })
+                    }
                   </div>
                 </div>
               </div>
