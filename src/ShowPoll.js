@@ -3,9 +3,12 @@ import { useState } from 'react';
 import { UPDATE_POLL_TYPE } from "./redux/actions/pollActions.js"
 import { connect } from "react-redux";
 import { HOME_PAGE } from "./redux/actions/changePageAction.js"
+import { useNavigate } from 'react-router-dom';
 
 
 function ShowPoll(props) {
+    const navigate = useNavigate();
+
     var [pollChoice, setPollChoice] = useState("");
     let getPoll = props.allPolls.filter((poll) => {
         return poll.pollName == props.currentPoll
@@ -43,7 +46,7 @@ function ShowPoll(props) {
                                 <Select options={options} onChange={(e) => setPollChoice(e.value)} />
                             </div>
                             <div className="pb-3">
-                                <button className="btn btn-primary" onClick={() => { props.setAlertText("You updated your Poll!"); props.showNotificationBox(true); anwserPoll(pollChoice, props, getPoll.pollName); props.dispatch({type: HOME_PAGE }) }}>Update Poll</button>
+                                <button className="btn btn-primary" onClick={() => { props.setAlertText("You updated your Poll!"); props.showNotificationBox(true); anwserPoll(pollChoice, props, getPoll.pollName);  navigate('/home');  }}>Update Poll</button>
                             </div>
                         </div>
                     </div>
