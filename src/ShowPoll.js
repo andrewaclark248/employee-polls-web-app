@@ -13,7 +13,7 @@ function ShowPoll(props) {
     let getPoll = props.allPolls.filter((poll) => {
         return poll.pollName == props.currentPoll
     })[0]
-    console.log(getPoll)
+
     let options = [
         { value: getPoll.firstOption, label: getPoll.firstOption },
         { value: getPoll.secondOption, label: getPoll.secondOption }

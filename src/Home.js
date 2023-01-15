@@ -75,7 +75,7 @@ function Home(props) {
                             <span className="text-dark">{poll?.pollName}</span>
                           </div>
                           <div className="col-5">
-                            <button className="btn btn-primary" onClick={() => { props.setCurrentPoll(poll.pollName); navigate('/awnsered-poll'); }}> Show Poll</button>
+                            <button className="btn btn-primary" onClick={() => { props.setCurrentPoll(poll.pollName); navigate('/questions/'+poll?.id); }}> Show Poll</button>
                           </div>
                         </div>)
                       })
