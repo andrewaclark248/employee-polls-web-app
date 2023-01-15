@@ -31,6 +31,10 @@ function ShowPoll(props) {
                         </div>
                         <div className="card-body">
                             <div className="pb-3">
+                                <label className="">Poll ID</label>
+                                <input className="form-control"  disabled={true} value={getPoll.id}/>
+                            </div>
+                            <div className="pb-3">
                                 <label className="">Poll Name</label>
                                 <input className="form-control"  disabled={true} value={getPoll.pollName}/>
                             </div>

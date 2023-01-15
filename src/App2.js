@@ -21,8 +21,6 @@ function App2(props) {
     let [currentPoll, setCurrentPoll] = useState("");
     let [alertText, setAlertText] = useState("");
 
-    console.log("set show = " + show);
-
     return (
         <div className="app">
           <BrowserRouter>
@@ -54,7 +52,7 @@ function App2(props) {
                   </React.Fragment>
                 } />
 
-                <Route path="awnsered-poll" element={
+                <Route path="questions/:question_id" element={
                   <React.Fragment>
                     <AppNavBar />
                     <AnwseredPoll currentPoll={currentPoll} {...props} />
