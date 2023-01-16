@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { SHOW_POLL_PAGE, ANWSERED_POLL_PAGE} from "./redux/actions/changePageAction.js"
+import { SHOW_POLL_PAGE, ANWSERED_POLL_PAGE} from "../redux/actions/changePageAction.js"
 import AppNavBar from './Navbar.js';
 import { useNavigate } from 'react-router-dom';
 
@@ -126,13 +126,13 @@ function Home(props) {
 function getAvatar(currentUser) {
   var file = null
   if (currentUser == "jane-doe") {
-      file = require("./assets/avatar-3-female.jpg")
+      file = require("./../assets/avatar-3-female.jpg")
   } else if(currentUser == "john-doe") {
-      file = require("./assets/avatar-2-male.jpg")
+      file = require("./../assets/avatar-2-male.jpg")
   } else if (currentUser == "batman") {
-      file = require("./assets/avatar-1-male.jpg")
+      file = require("./../assets/avatar-1-male.jpg")
   } else {
-      file = require("./assets/none.jpg")
+      file = require("./../assets/none.jpg")
   }
   return file;
 }

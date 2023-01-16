@@ -1,8 +1,8 @@
 import Select from 'react-select'
 import { useState } from 'react';
-import { UPDATE_POLL_TYPE } from "./redux/actions/pollActions.js"
+import { UPDATE_POLL_TYPE } from "../redux/actions/pollActions.js"
 import { connect } from "react-redux";
-import { HOME_PAGE } from "./redux/actions/changePageAction.js"
+import { HOME_PAGE } from "../redux/actions/changePageAction.js"
 import { useNavigate } from 'react-router-dom';
 
 
@@ -20,7 +20,7 @@ function ShowPoll(props) {
         { value: getPoll.secondOption, label: getPoll.secondOption }
       ]
     var picture = getAvatar(props.currentUser)
-    //var picturePath = require("./assets/avatar-3-female.jpg")
+
     return (
         <div>
             <h1 className="">New Poll</h1>
@@ -90,13 +90,13 @@ function getUserNamePretty(currentUser) {
 function getAvatar(currentUser) {
     var file = null
     if (currentUser == "jane-doe") {
-        file = require("./assets/avatar-3-female.jpg")
+        file = require("./../assets/avatar-3-female.jpg")
     } else if(currentUser == "john-doe") {
-        file = require("./assets/avatar-2-male.jpg")
+        file = require("./../assets/avatar-2-male.jpg")
     } else if (currentUser == "batman") {
-        file = require("./assets/avatar-1-male.jpg")
+        file = require("./../assets/avatar-1-male.jpg")
     } else {
-        file = require("./assets/none.jpg")
+        file = require("./../assets/none.jpg")
     }
     return file;
 }

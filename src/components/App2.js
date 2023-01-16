@@ -1,10 +1,10 @@
-import './App.css';
+import './../App.css';
 import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
 import Home from './Home.js';
 import Login from './Login.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { connect } from "react-redux";
-import { LOGIN_PAGE, HOME_PAGE, NEW_POLL_PAGE, SHOW_POLL_PAGE, ANWSERED_POLL_PAGE } from "./redux/actions/changePageAction.js"
+import { LOGIN_PAGE, HOME_PAGE, NEW_POLL_PAGE, SHOW_POLL_PAGE, ANWSERED_POLL_PAGE } from "../redux/actions/changePageAction.js"
 import AppNavBar from './Navbar.js';
 import NewPoll from './NewPoll.js';
 import NotificationBox from './NotificationBox.js';
