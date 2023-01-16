@@ -32,7 +32,7 @@ export function getAvatar(currentUser) {
       file = require("./../assets/avatar-3-female.jpg")
   } else if(currentUser == "john-doe") {
       file = require("./../assets/avatar-2-male.jpg")
-  } else if (currentUser == "batman") {
+  } else if (currentUser == "batman-robin") {
       file = require("./../assets/avatar-1-male.jpg")
   } else {
       file = require("./../assets/none.jpg")
@@ -84,4 +84,25 @@ export function numberOfQuestionsAsked(originalPolls, currentUser) {
     pollsAsked = polls.length
     return pollsAsked
 } 
+
+
+export function numberOfPeopleWhoVotedForPoll(userPolls, currentPoll) {
+    var polls = userPolls.filter((poll) => {
+        return poll.originalPollId == currentPoll.originalPollId;
+    })
+
+    var pollWithSameAnswer = polls.filter((poll) => {
+        return poll.answer == currentPoll.answer;
+    })
+    var result = (pollWithSameAnswer.length - 1)
+    if (result < 0) {
+        result = 0;
+    }
+    return result
+} 
+
+export function percentageOfPeopleWhoVotedForPoll(totalVote) {
+    var result = (Math.floor((totalVote/3)*100))
+    return result;
+}
 
