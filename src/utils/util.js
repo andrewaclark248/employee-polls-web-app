@@ -101,5 +101,8 @@ export function numberOfPeopleWhoVotedForPoll(userPolls, currentPoll) {
     return result
 } 
 
-
+export function percentageOfPeopleWhoVotedForPoll(totalVote) {
+    var result = (Math.floor((totalVote/3)*100))
+    return result;
+}
 

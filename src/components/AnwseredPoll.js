@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { numberOfPeopleWhoVotedForPoll } from "./../utils/util.js"
+import { numberOfPeopleWhoVotedForPoll, percentageOfPeopleWhoVotedForPoll } from "./../utils/util.js"
 
 function AnwseredPoll(props) {
 
@@ -7,7 +7,8 @@ function AnwseredPoll(props) {
         return poll.id == props.currentPoll
     })[0]
 
-    var userWithSameAnswer = numberOfPeopleWhoVotedForPoll(props.userPolls, getPoll)
+    var userWithSameAnswer = numberOfPeopleWhoVotedForPoll(props.userPolls, getPoll);
+    var precentVote = percentageOfPeopleWhoVotedForPoll(userWithSameAnswer);
 
     return(
     <div>
@@ -52,12 +53,31 @@ function AnwseredPoll(props) {
                             Poll Stats
                         </div>
                         <div className="card-body">
-                            <span className="pe-2">
-                                Number of people who voted for <span className="fw-bold"><u>{getPoll.answer}</u></span> answer: 
-                            </span>
-                            <span className="fw-bold">
-                                {userWithSameAnswer}
-                            </span>
+                            <div className="row pb-3">
+                                <div className="col-8">
+                                    <span>
+                                        No. of people who voted for <span className="fw-bold"><u>{getPoll.answer}</u></span> answer: 
+                                    </span>
+                                </div>
+                                <div className="col-4">
+                                    <span className="fw-bold">
+                                        {userWithSameAnswer}
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-8">
+                                    <span>
+                                        Percent of people who voted for <span className="fw-bold"><u>{getPoll.answer}</u></span> answer: 
+                                    </span>
+                                </div>
+                                <div className="col-4">
+                                    <span className="fw-bold">
+                                        {precentVote}%
+                                    </span>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
