@@ -4,7 +4,7 @@ import Container from 'react-bootstrap';
 import { Navbar, Nav } from 'react-bootstrap';
 //import NavDropdown from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import { LOGIN_TYPE } from "./redux/actions/loginUserAction.js"
+import { LOGIN_TYPE } from "../redux/actions/loginUserAction.js"
 
 
 function AppNavBar(props) {

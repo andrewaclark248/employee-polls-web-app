@@ -1,8 +1,8 @@
 import Select from 'react-select'
-import './App.css'
+import './../App.css'
 import { connect } from "react-redux";
-import { LOGIN_TYPE } from "./redux/actions/loginUserAction.js"
-import { LOGIN_PAGE, HOME_PAGE } from "./redux/actions/changePageAction.js"
+import { LOGIN_TYPE } from "../redux/actions/loginUserAction.js"
+import { LOGIN_PAGE, HOME_PAGE } from "../redux/actions/changePageAction.js"
 import { Link } from "react-router-dom";
 
 

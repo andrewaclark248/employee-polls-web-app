@@ -1,11 +1,10 @@
 import Select from 'react-select'
-import './App.css'
+import './../App.css'
 import { connect } from "react-redux";
 import { useState } from 'react';
-import { NEW_POLL_TYPE } from "./redux/actions/pollActions.js"
-import { HOME_PAGE } from "./redux/actions/changePageAction.js"
+import { NEW_POLL_TYPE } from "../redux/actions/pollActions.js"
+import { HOME_PAGE } from "../redux/actions/changePageAction.js"
 import AppNavBar from './Navbar.js';
-import App from './App';
 import { useNavigate } from 'react-router-dom';
 
 

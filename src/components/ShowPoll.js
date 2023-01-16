@@ -1,9 +1,10 @@
 import Select from 'react-select'
 import { useState } from 'react';
-import { UPDATE_POLL_TYPE } from "./redux/actions/pollActions.js"
+import { UPDATE_POLL_TYPE } from "../redux/actions/pollActions.js"
 import { connect } from "react-redux";
-import { HOME_PAGE } from "./redux/actions/changePageAction.js"
+import { HOME_PAGE } from "../redux/actions/changePageAction.js"
 import { useNavigate } from 'react-router-dom';
+import { getAvatar, getUserNamePretty } from "./../utils/util.js"
 
 
 function ShowPoll(props) {
@@ -20,7 +21,7 @@ function ShowPoll(props) {
         { value: getPoll.secondOption, label: getPoll.secondOption }
       ]
     var picture = getAvatar(props.currentUser)
-    //var picturePath = require("./assets/avatar-3-female.jpg")
+
     return (
         <div>
             <h1 className="">New Poll</h1>
@@ -78,29 +79,7 @@ function anwserPoll(pollChoice, props, pollId) {
     if (pollChoice != "") {
         props.dispatch({type: UPDATE_POLL_TYPE, payload: {pollId: pollId, pollChoice: pollChoice}})
     }
-}
-
-function getUserNamePretty(currentUser) {
-    var firstName = currentUser.split("-")[0]
-    var lastName = currentUser.split("-")[1]
-    var name = firstName + " " + lastName
-    return name;
-}
-
-function getAvatar(currentUser) {
-    var file = null
-    if (currentUser == "jane-doe") {
-        file = require("./assets/avatar-3-female.jpg")
-    } else if(currentUser == "john-doe") {
-        file = require("./assets/avatar-2-male.jpg")
-    } else if (currentUser == "batman") {
-        file = require("./assets/avatar-1-male.jpg")
-    } else {
-        file = require("./assets/none.jpg")
-    }
-    return file;
-}
-  
+}  
 
 export default connect((state) => ({
     currentUser: state.loginUser.currentUser,

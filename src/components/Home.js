@@ -1,15 +1,20 @@
 import { connect } from "react-redux";
-import { SHOW_POLL_PAGE, ANWSERED_POLL_PAGE} from "./redux/actions/changePageAction.js"
+import { SHOW_POLL_PAGE, ANWSERED_POLL_PAGE} from "../redux/actions/changePageAction.js"
 import AppNavBar from './Navbar.js';
 import { useNavigate } from 'react-router-dom';
+import { unansweredPolls, awnseredPolls, getUserNamePretty, getAvatar } from "./../utils/util.js"
 
 function Home(props) { 
     const navigate = useNavigate();
     var userUnansweredPolls = null;
     var userAnwseredPolls = null;
     if (props.userPolls?.length > 0) {
-      userUnansweredPolls = unansweredPolls(props.userPolls, props.currentUser)
-      userAnwseredPolls = awnseredPolls(props.userPolls, props.currentUser)
+      var currentUserPolls = props.userPolls.filter((poll) => {
+        return poll.user == props.currentUser;
+    })
+
+      userUnansweredPolls = unansweredPolls(currentUserPolls, props.currentUser)
+      userAnwseredPolls = awnseredPolls(currentUserPolls, props.currentUser)
     }
 
     //sort unawnsered polls
@@ -96,51 +101,9 @@ function Home(props) {
     );
   }
 
-
-  function unansweredPolls(allPolls, currentUser) {
-    var userAnansweredPolls = allPolls.filter(function(poll) {
-      if ((poll.user == currentUser) && (poll.answer == "none")){
-        return poll;
-      }
-    });
-    return userAnansweredPolls
-  } 
-
-  function awnseredPolls (allPolls, currentUser) {
-    var userAnsweredPolls = allPolls.filter(function(poll) {
-      if ((poll.user == currentUser) && (poll.answer != "none")){
-        return poll;
-      }
-    });
-    return userAnsweredPolls;
-  }
-
-  function getUserNamePretty(currentUser) {
-    var firstName = currentUser.split("-")[0]
-    var lastName = currentUser.split("-")[1]
-    var name = firstName + " " + lastName
-    return name;
-  }
-
-
-function getAvatar(currentUser) {
-  var file = null
-  if (currentUser == "jane-doe") {
-      file = require("./assets/avatar-3-female.jpg")
-  } else if(currentUser == "john-doe") {
-      file = require("./assets/avatar-2-male.jpg")
-  } else if (currentUser == "batman") {
-      file = require("./assets/avatar-1-male.jpg")
-  } else {
-      file = require("./assets/none.jpg")
-  }
-  return file;
-}
-
   
-  
-  export default connect((state) => ({
-    currentUser: state.loginUser.currentUser,
-    originalPolls: state.polls.originalPolls,
-    userPolls: state.polls.userPolls
-  }))(Home);
+export default connect((state) => ({
+  currentUser: state.loginUser.currentUser,
+  originalPolls: state.polls.originalPolls,
+  userPolls: state.polls.userPolls
+}))(Home);

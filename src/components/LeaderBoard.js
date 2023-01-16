@@ -1,5 +1,6 @@
-import { allUsers } from "./allUsers";
 import { connect } from "react-redux";
+import { getUserNamePretty, getAvatar, getUserStats, sortStats } from "./../utils/util.js"
+
 
 function LeaderBoard(props) {
     let userStats = getUserStats(props.userPolls, props.originalPolls)
@@ -56,79 +57,6 @@ function LeaderBoard(props) {
 
 }
 
-function sortStats(stats) {
-    stats.sort(function(a, b) {
-        var stat1 = a.numberOfQuestionsAsked + a.numberOfQuestionsAnswered;
-        var stat2 = b.numberOfQuestionsAsked + b.numberOfQuestionsAnswered;
-        return parseFloat(stat2) - parseFloat(stat1);
-    });
-    return stats;
-}
-
-function getUserStats(userPolls, originalPolls) {
-    var stats = []
-
-    allUsers.map((user) => {
-        var currentUserStats = {
-            user: user,
-            numberOfQuestionsAsked: null,
-            numberOfQuestionsAnswered: null 
-        }
-        var currentUserPolls = userPolls.filter((poll) => {
-            return poll.user == user;
-        })
-        var unawnseredPollsList = awnseredPolls(currentUserPolls)
-        currentUserStats.numberOfQuestionsAnswered = unawnseredPollsList.length;
-
-        var numberOfQuestionsAskedResult = numberOfQuestionsAsked(originalPolls, user)
-        currentUserStats.numberOfQuestionsAsked = numberOfQuestionsAskedResult;
-        
-        stats.push(currentUserStats)
-    })
-    return stats;
-}
-
-
-
-function numberOfQuestionsAsked(originalPolls, currentUser) {
-    var pollsAsked = null;
-    var polls = originalPolls.filter((poll) => {
-        return poll.currentUser == currentUser
-    })
-    pollsAsked = polls.length
-    return pollsAsked
-} 
-
-  function awnseredPolls (allPolls, currentUser) {
-    var userAnsweredPolls = allPolls.filter(function(poll) {
-      if ((poll.currentUser == currentUser) && (poll.answer != "none")){
-        return poll;
-      }
-    });
-    return userAnsweredPolls;
-  }
-
-  function getUserNamePretty(currentUser) {
-    var firstName = currentUser.split("-")[0]
-    var lastName = currentUser.split("-")[1]
-    var name = firstName + " " + lastName
-    return name;
-  }
-
-  function getAvatar(currentUser) {
-    var file = null
-    if (currentUser == "jane-doe") {
-        file = require("./assets/avatar-3-female.jpg")
-    } else if(currentUser == "john-doe") {
-        file = require("./assets/avatar-2-male.jpg")
-    } else if (currentUser == "batman-robin") {
-        file = require("./assets/avatar-1-male.jpg")
-    } else {
-        file = require("./assets/none.jpg")
-    }
-    return file;
-  }
-  
 
 
 export default connect((state) => ({
