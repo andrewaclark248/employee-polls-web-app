@@ -7,10 +7,11 @@ function AnwseredPoll(props) {
         return poll.id == props.currentPoll
     })[0]
 
+    var userWithSameAnswer = numberOfPeopleWhoVotedForPoll(props.userPolls, getPoll)
+
     return(
     <div>
-
-            <div className="row">
+            <div className="row pb-5">
                 <div className="col-3"></div>
                 <div className="col-6">
                     <div className="card">
@@ -38,13 +39,27 @@ function AnwseredPoll(props) {
                                 <label className="">Awnser</label>
                                 <input className="form-control"  disabled={true} value={getPoll.answer}/>
                             </div>
-                            
- 
-
                         </div>
                     </div>
-
-
+                </div>
+                <div className="col-3"></div>
+            </div>
+            <div className="row">
+                <div className="col-3"></div>
+                <div className="col-6">
+                    <div className="card">
+                        <div className="card-header">
+                            Poll Stats
+                        </div>
+                        <div className="card-body">
+                            <span className="pe-2">
+                                Number of people who voted for <span className="fw-bold"><u>{getPoll.answer}</u></span> answer: 
+                            </span>
+                            <span className="fw-bold">
+                                {userWithSameAnswer}
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 <div className="col-3"></div>
             </div>
@@ -52,6 +67,21 @@ function AnwseredPoll(props) {
 
     </div>)
 }
+
+function numberOfPeopleWhoVotedForPoll(userPolls, currentPoll) {
+    var polls = userPolls.filter((poll) => {
+        return poll.originalPollId == currentPoll.originalPollId;
+    })
+
+    var pollWithSameAnswer = polls.filter((poll) => {
+        return poll.answer == currentPoll.answer;
+    })
+    var result = (pollWithSameAnswer.length - 1)
+    if (result < 0) {
+        result = 0;
+    }
+    return result
+} 
 
 
   
