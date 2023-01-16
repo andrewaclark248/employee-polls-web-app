@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 
 
 function AnwseredPoll(props) {
-    console.log(props.currentPoll)
+
     let getPoll = props.userPolls.filter((poll) => {
         return poll.id == props.currentPoll
     })[0]

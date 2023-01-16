@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 function Home(props) { 
     const navigate = useNavigate();
-
     var userUnansweredPolls = null;
     var userAnwseredPolls = null;
     if (props.userPolls?.length > 0) {
@@ -100,7 +99,7 @@ function Home(props) {
 
   function unansweredPolls(allPolls, currentUser) {
     var userAnansweredPolls = allPolls.filter(function(poll) {
-      if ((poll.currentUser == currentUser) && (poll.answer == "none")){
+      if ((poll.user == currentUser) && (poll.answer == "none")){
         return poll;
       }
     });
@@ -109,7 +108,7 @@ function Home(props) {
 
   function awnseredPolls (allPolls, currentUser) {
     var userAnsweredPolls = allPolls.filter(function(poll) {
-      if ((poll.currentUser == currentUser) && (poll.answer != "none")){
+      if ((poll.user == currentUser) && (poll.answer != "none")){
         return poll;
       }
     });

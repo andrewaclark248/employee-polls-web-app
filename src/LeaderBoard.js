@@ -1,7 +1,9 @@
 import { allUsers } from "./allUsers";
+import { connect } from "react-redux";
 
-export default function LeaderBoard(props) {
-
+function LeaderBoard(props) {
+    let userStats = getUserStats(props.userPolls, props.originalPolls)
+    console.log("userStats = ", userStats)
 
     return (
         <div>
@@ -27,18 +29,19 @@ export default function LeaderBoard(props) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                        <td>@fat</td>
-                                    </tr>
+                                    {
+                                        userStats.map((stat, index) => {
+                                            return (
+                                                <tr key={index}>
+                                                    <td>{getUserNamePretty(stat.user)}</td>
+                                                    <td>Otto</td>
+                                                    <td>{stat.numberOfQuestionsAsked}</td>
+                                                    <td>{stat.numberOfQuestionsAnswered}</td>
+                                                </tr>
+                                            );
+                                        })
+
+                                    }
                                 </tbody>
                             </table>
                         </div>
@@ -51,3 +54,61 @@ export default function LeaderBoard(props) {
     );
 
 }
+
+function getUserStats(userPolls, originalPolls) {
+    var stats = []
+
+    allUsers.map((user) => {
+        var currentUserStats = {
+            user: user,
+            numberOfQuestionsAsked: null,
+            numberOfQuestionsAnswered: null 
+        }
+        var currentUserPolls = userPolls.filter((poll) => {
+            return poll.user == user;
+        })
+        var unawnseredPollsList = awnseredPolls(currentUserPolls)
+        currentUserStats.numberOfQuestionsAnswered = unawnseredPollsList.length;
+
+        var numberOfQuestionsAskedResult = numberOfQuestionsAsked(originalPolls, user)
+        currentUserStats.numberOfQuestionsAsked = numberOfQuestionsAskedResult;
+        
+        stats.push(currentUserStats)
+    })
+    return stats;
+}
+
+
+
+function numberOfQuestionsAsked(originalPolls, currentUser) {
+    var pollsAsked = null;
+    var polls = originalPolls.filter((poll) => {
+        return poll.currentUser == currentUser
+    })
+    pollsAsked = polls.length
+    return pollsAsked
+} 
+
+  function awnseredPolls (allPolls, currentUser) {
+    var userAnsweredPolls = allPolls.filter(function(poll) {
+      if ((poll.currentUser == currentUser) && (poll.answer != "none")){
+        return poll;
+      }
+    });
+    return userAnsweredPolls;
+  }
+
+  function getUserNamePretty(currentUser) {
+    var firstName = currentUser.split("-")[0]
+    var lastName = currentUser.split("-")[1]
+    var name = firstName + " " + lastName
+    return name;
+  }
+
+
+
+export default connect((state) => ({
+    currentUser: state.loginUser.currentUser,
+    userPolls: state.polls.userPolls,
+    originalPolls: state.polls.originalPolls
+  }))(LeaderBoard);

@@ -65,7 +65,7 @@ function createPollForEachUser(state, action, pollId) {
 	let userPolls = []
 	allUsers.map((user) => {
 		let newPoll = {
-			currentUser: user,
+			user: user,
 			originalPollId: pollId,
 			id: uuidv4(),
 			pollName: action.payload.pollName,
