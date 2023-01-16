@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 
 function LeaderBoard(props) {
     let userStats = getUserStats(props.userPolls, props.originalPolls)
-    console.log("userStats = ", userStats)
-
+    var sortedStats = sortStats(userStats);
     return (
         <div>
             <div className="row">
@@ -30,7 +29,7 @@ function LeaderBoard(props) {
                                 </thead>
                                 <tbody>
                                     {
-                                        userStats.map((stat, index) => {
+                                        sortedStats.map((stat, index) => {
                                             return (
                                                 <tr key={index}>
                                                     <td>{getUserNamePretty(stat.user)}</td>
@@ -55,6 +54,15 @@ function LeaderBoard(props) {
         </div>
     );
 
+}
+
+function sortStats(stats) {
+    stats.sort(function(a, b) {
+        var stat1 = a.numberOfQuestionsAsked + a.numberOfQuestionsAnswered;
+        var stat2 = b.numberOfQuestionsAsked + b.numberOfQuestionsAnswered;
+        return parseFloat(stat2) - parseFloat(stat1);
+    });
+    return stats;
 }
 
 function getUserStats(userPolls, originalPolls) {
