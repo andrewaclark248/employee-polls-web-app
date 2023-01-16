@@ -33,17 +33,18 @@ export const changePoll = (state = initialState, action) => {
 
 		return result;
 	} else if (action.type == UPDATE_POLL_TYPE) {
-		var updatedPoll = state.allPolls.filter((poll) => {
-			return poll.pollName == action.payload.pollName
+		var updatedPoll = state.userPolls.filter((poll) => {
+			return poll.id == action.payload.pollId
 		})[0]
+
 		updatedPoll.answer = action.payload.pollChoice
 		
-		var allUserPolls = state.allPolls.filter((poll) => {
-			return poll.pollName != action.payload.pollName
+		var allUserPolls = state.userPolls.filter((poll) => {
+			return poll.id != action.payload.pollId
 		})
 
 		var listOfPolls = allUserPolls.concat(updatedPoll)
-		var result = { ...state, allPolls: listOfPolls}
+		var result = { ...state, userPolls: listOfPolls}
 		return result;
 	} else {
 		return state;

@@ -10,9 +10,10 @@ function ShowPoll(props) {
     const navigate = useNavigate();
 
     var [pollChoice, setPollChoice] = useState("");
-    let getPoll = props.allPolls.filter((poll) => {
-        return poll.pollName == props.currentPoll
+    let getPoll = props.userPolls.filter((poll) => {
+        return poll.id == props.currentPoll
     })[0]
+
 
     let options = [
         { value: getPoll.firstOption, label: getPoll.firstOption },
@@ -59,7 +60,7 @@ function ShowPoll(props) {
                                 <Select options={options} onChange={(e) => setPollChoice(e.value)} />
                             </div>
                             <div className="pb-3">
-                                <button className="btn btn-primary" onClick={() => { props.setAlertText("You updated your Poll!"); props.showNotificationBox(true); anwserPoll(pollChoice, props, getPoll.pollName);  navigate('/home');  }}>Update Poll</button>
+                                <button className="btn btn-primary" onClick={() => { props.setAlertText("You updated your Poll!"); props.showNotificationBox(true); anwserPoll(pollChoice, props, getPoll.id);  navigate('/home');  }}>Update Poll</button>
                             </div>
                         </div>
                     </div>
@@ -73,9 +74,9 @@ function ShowPoll(props) {
 }
 
 //validation
-function anwserPoll(pollChoice, props, pollName) {
+function anwserPoll(pollChoice, props, pollId) {
     if (pollChoice != "") {
-        props.dispatch({type: UPDATE_POLL_TYPE, payload: {pollName: pollName, pollChoice: pollChoice}})
+        props.dispatch({type: UPDATE_POLL_TYPE, payload: {pollId: pollId, pollChoice: pollChoice}})
     }
 }
 
@@ -102,7 +103,8 @@ function getAvatar(currentUser) {
   
 
 export default connect((state) => ({
-    currentUser: state.loginUser.currentUser
+    currentUser: state.loginUser.currentUser,
+    userPolls: state.polls.userPolls
 }), null)(ShowPoll);
 
 

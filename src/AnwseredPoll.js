@@ -1,8 +1,10 @@
+import { connect } from "react-redux";
 
 
 function AnwseredPoll(props) {
-    let getPoll = props.allPolls.filter((poll) => {
-        return poll.pollName == props.currentPoll
+    console.log(props.currentPoll)
+    let getPoll = props.userPolls.filter((poll) => {
+        return poll.id == props.currentPoll
     })[0]
 
     return(
@@ -51,4 +53,12 @@ function AnwseredPoll(props) {
     </div>)
 }
 
-export default AnwseredPoll;
+
+  
+export default connect((state) => ({
+    currentUser: state.loginUser.currentUser,
+    originalPolls: state.polls.originalPolls,
+    userPolls: state.polls.userPolls
+  }))(AnwseredPoll);
+
+//export default AnwseredPoll;
