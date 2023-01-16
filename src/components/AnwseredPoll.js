@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-
+import { numberOfPeopleWhoVotedForPoll } from "./../utils/util.js"
 
 function AnwseredPoll(props) {
 
@@ -67,21 +67,6 @@ function AnwseredPoll(props) {
 
     </div>)
 }
-
-function numberOfPeopleWhoVotedForPoll(userPolls, currentPoll) {
-    var polls = userPolls.filter((poll) => {
-        return poll.originalPollId == currentPoll.originalPollId;
-    })
-
-    var pollWithSameAnswer = polls.filter((poll) => {
-        return poll.answer == currentPoll.answer;
-    })
-    var result = (pollWithSameAnswer.length - 1)
-    if (result < 0) {
-        result = 0;
-    }
-    return result
-} 
 
 
   
