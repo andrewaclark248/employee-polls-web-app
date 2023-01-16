@@ -20,7 +20,7 @@ function AppNavBar(props) {
             <Nav className="me-auto">
               <Link className="active fw-bold" to="/home" style={{textDecoration: "none", color: "black", paddingRight: 10 }}>Home</Link>
               <Link className="active fw-bold" to="/add" style={{textDecoration: "none", color: "black", paddingRight: 10 }}>New Poll</Link>
-              <Link className="active fw-bold" to="/add" style={{textDecoration: "none", color: "black", paddingRight: 10 }}>LeaderBoard</Link>
+              <Link className="active fw-bold" to="/leaderboard" style={{textDecoration: "none", color: "black", paddingRight: 10 }}>LeaderBoard</Link>
             </Nav>
           </Navbar.Collapse>
           <Link className="active fw-bold " to="/" style={{textDecoration: "none", color: "black", paddingRight: 10 }} onClick={() => { props.dispatch({type: LOGIN_TYPE, payload: 'none'}) }}>Log Out</Link>

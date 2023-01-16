@@ -60,7 +60,6 @@ function onClickHandler(props, firstOption, secondOption, pollName) {
     props.showNotificationBox(true); 
     
     props.dispatch({type: NEW_POLL_TYPE, payload: {firstOption: firstOption, secondOption: secondOption, currentUser: props.currentUser, pollName: pollName} });
-
 }
 
 

@@ -11,6 +11,7 @@ import NotificationBox from './NotificationBox.js';
 import React, { useState } from 'react';
 import ShowPoll from './ShowPoll.js';
 import AnwseredPoll from './AnwseredPoll.js';
+import LeaderBoard from './LeaderBoard';
 
 
 
@@ -64,6 +65,13 @@ function App2(props) {
                   <React.Fragment>
                     <AppNavBar />
                     <ShowPoll currentPoll={currentPoll} allPolls={props.allPolls} showNotificationBox={setShow} setAlertText={setAlertText}/>
+                  </React.Fragment>
+                } />
+
+                <Route path="leaderboard" element={
+                  <React.Fragment>
+                    <AppNavBar />
+                    <LeaderBoard {...props} />
                   </React.Fragment>
                 } />
 
