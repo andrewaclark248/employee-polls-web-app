@@ -34,7 +34,9 @@ function LeaderBoard(props) {
                                             return (
                                                 <tr key={index}>
                                                     <td>{getUserNamePretty(stat.user)}</td>
-                                                    <td>Otto</td>
+                                                    <td>
+                                                        <img src={getAvatar(stat.user)} height={20} width={20} />
+                                                    </td>
                                                     <td>{stat.numberOfQuestionsAsked}</td>
                                                     <td>{stat.numberOfQuestionsAnswered}</td>
                                                 </tr>
@@ -105,6 +107,20 @@ function numberOfQuestionsAsked(originalPolls, currentUser) {
     return name;
   }
 
+  function getAvatar(currentUser) {
+    var file = null
+    if (currentUser == "jane-doe") {
+        file = require("./assets/avatar-3-female.jpg")
+    } else if(currentUser == "john-doe") {
+        file = require("./assets/avatar-2-male.jpg")
+    } else if (currentUser == "batman-robin") {
+        file = require("./assets/avatar-1-male.jpg")
+    } else {
+        file = require("./assets/none.jpg")
+    }
+    return file;
+  }
+  
 
 
 export default connect((state) => ({
