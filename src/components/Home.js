@@ -8,8 +8,9 @@ function Home(props) {
     //console.log("questions = ", props.questions)
 
     var unansweredQuestions = getUnansweredQuestions(props.questions, props.currentUser)
+    var answeredQuestions = getAnsweredQuestions(props.questions, props.currentUser)
 
-
+    console.log("answeredQuestions", answeredQuestions)
     useEffect(() => {
       const getAnsweredQuestions = async () => {
         //var result = await _getQuestions()
@@ -90,7 +91,21 @@ function Home(props) {
                 <div className="card-body">
 
                   <div className="">
-
+                    {answeredQuestions != null && answeredQuestions[0] != undefined &&
+                            answeredQuestions.map((question, index) => {
+                              return (<div className="row pb-3" key={index}>
+                                <div className="col-2">
+                                  <span className="text-dark">{(index+1).toString()}.</span>
+                                </div>
+                                <div className="col-5">
+                                  <span className="text-dark">{question.id}</span>
+                                </div>
+                                <div className="col-5">
+                                  <button className="btn btn-primary" onClick={() => { props.setCurrentPoll(poll?.id); navigate('/show-poll'); }}> Show Poll</button>
+                                </div>
+                              </div>)
+                            })
+                    }
                   </div>
 
                 </div>
@@ -116,13 +131,32 @@ function getUnansweredQuestions(questions, currentUser) {
   var questionKeys = Object.keys(questions)
   var unansweredQuestions = questionKeys.map((questionKey) => {
     var question = questions[questionKey]
-    //console.log("question.optionOne.votes ", question.optionOne.votes)
     if (!question.optionOne.votes.includes(currentUser) && !question.optionTwo.votes.includes(currentUser)) {
       return question;
     }
-
+  })
+  //remove undefineds
+  unansweredQuestions = unansweredQuestions.filter((question) => {
+    return question != undefined
   })
   return unansweredQuestions;
+}
+
+function getAnsweredQuestions(questions, currentUser) {
+  var questionKeys = Object.keys(questions)
+  var answeredQuestions = questionKeys.map((questionKey) => {
+    var question = questions[questionKey]
+    if (question.optionOne.votes.includes(currentUser) || question.optionTwo.votes.includes(currentUser)) {
+      return question;
+    } else {
+      return
+    }
+  })
+  //remove undefineds
+  answeredQuestions = answeredQuestions.filter((question) => {
+    return question != undefined
+  })
+  return answeredQuestions;
 }
   
 export default connect((state) => ({
