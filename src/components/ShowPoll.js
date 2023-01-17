@@ -1,8 +1,7 @@
 import Select from 'react-select'
 import { useState } from 'react';
-import { UPDATE_POLL_TYPE } from "../redux/actions/pollActions.js"
+//import { UPDATE_POLL_TYPE } from "../redux/actions/pollActions.js"
 import { connect } from "react-redux";
-import { HOME_PAGE } from "../redux/actions/changePageAction.js"
 import { useNavigate } from 'react-router-dom';
 import { getAvatar, getUserNamePretty } from "./../utils/util.js"
 
@@ -77,7 +76,7 @@ function ShowPoll(props) {
 //validation
 function anwserPoll(pollChoice, props, pollId) {
     if (pollChoice != "") {
-        props.dispatch({type: UPDATE_POLL_TYPE, payload: {pollId: pollId, pollChoice: pollChoice}})
+        //props.dispatch({type: UPDATE_POLL_TYPE, payload: {pollId: pollId, pollChoice: pollChoice}})
     }
 }  
 

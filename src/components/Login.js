@@ -2,14 +2,14 @@ import Select from 'react-select'
 import './../App.css'
 import { connect } from "react-redux";
 import { LOGIN_TYPE } from "../redux/actions/loginUserAction.js"
-import { LOGIN_PAGE, HOME_PAGE } from "../redux/actions/changePageAction.js"
 import { Link } from "react-router-dom";
 
 
 const options = [
-    { value: 'john-doe', label: 'John Doe' },
-    { value: 'jane-doe', label: 'Jane Doe' },
-    { value: 'batman-robin', label: 'Batman' }
+    { value: 'sarahedo', label: 'Sarah Edo' },
+    { value: 'tylermcGinnis', label: 'Tyler McGinnis' },
+    { value: 'miketsamis', label: 'Mike Tsamis', },
+    { value: 'zenobiaoshikanlu', label: 'Zenobia Oshikanlu', }
   ]
 
 function Login(props) {
@@ -36,8 +36,8 @@ function Login(props) {
   }
 
 export default connect((state) => ({
-	currentPage: state.changePage.currentPage
 }))(Login);
+
 
 
   

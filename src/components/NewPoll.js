@@ -2,16 +2,14 @@ import Select from 'react-select'
 import './../App.css'
 import { connect } from "react-redux";
 import { useState } from 'react';
-import { NEW_POLL_TYPE } from "../redux/actions/pollActions.js"
-import { HOME_PAGE } from "../redux/actions/changePageAction.js"
 import AppNavBar from './Navbar.js';
 import { useNavigate } from 'react-router-dom';
-
+import { _saveQuestion } from './../DATA.js'
+import { CREATE_QUESTION } from './../redux/actions/questionAction.js'
 
 function NewPoll(props) {
   var [firstOption, setFirstOption] = useState("");
   var [secondOption, setSecondOption] = useState("");
-  var [pollName, setpollName] = useState("");
   const navigate = useNavigate();
 
     return (
@@ -28,10 +26,6 @@ function NewPoll(props) {
                     <div className="card-body">
                         <h5 className="card-title pb-4">Would You Rather?</h5>
                         <div className="pb-3">
-                            <label className="">Poll Name</label>
-                            <input className="form-control" placeholder="Poll Name" onChange={(e) => { setpollName(e.target.value) }} />
-                        </div>
-                        <div className="pb-3">
                             <label className="">First Option</label>
                             <input className="form-control" placeholder="First Option" onChange={(e) => { setFirstOption(e.target.value) }} />
                         </div>
@@ -40,7 +34,7 @@ function NewPoll(props) {
                             <input className="form-control" placeholder="Second Option" onChange={(e) => { setSecondOption(e.target.value) }} />
                         </div>
                         <div className="pb-2">
-                            <button className="btn btn-primary" onClick={() => { onClickHandler(props, firstOption, secondOption, pollName); navigate('/home'); }}>Create Poll</button>
+                            <button className="btn btn-primary" onClick={() => { onClickHandler(props, firstOption, secondOption); navigate('/home'); }}>Create Poll</button>
                         </div>
                     </div>
                 </div>
@@ -53,18 +47,25 @@ function NewPoll(props) {
   }
 
 
-function onClickHandler(props, firstOption, secondOption, pollName) {
+async function onClickHandler(props, firstOption, secondOption) {
     props.setAlertText("You created a New Poll!!!"); 
     
     props.showNotificationBox(true); 
     
-    props.dispatch({type: NEW_POLL_TYPE, payload: {firstOption: firstOption, secondOption: secondOption, currentUser: props.currentUser, pollName: pollName} });
+    var question = {
+        optionOneText: firstOption,
+        optionTwoText: secondOption,
+        author: props.currentUser
+    }
+
+    var result = await _saveQuestion(question)
+    props.dispatch({type: CREATE_QUESTION, payload: {question: result} });
 }
 
 
 export default connect((state) => ({
-	currentUser: state.loginUser.currentUser,
-	allPolls: state.polls.allPolls
+	currentUser: state.loginUser.currentUser
+	//allPolls: state.polls.allPolls
 }))(NewPoll);
 
 
