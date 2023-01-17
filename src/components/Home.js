@@ -10,16 +10,6 @@ function Home(props) {
     var unansweredQuestions = getUnansweredQuestions(props.questions, props.currentUser)
     var answeredQuestions = getAnsweredQuestions(props.questions, props.currentUser)
 
-    console.log("answeredQuestions", answeredQuestions)
-    useEffect(() => {
-      const getAnsweredQuestions = async () => {
-        //var result = await _getQuestions()
-        //console.log("result === ", result)
-      }
-
-      getAnsweredQuestions();
-    }, [])
-
     //await getQuestions()
     /**
     var userUnansweredPolls = null;
@@ -51,7 +41,7 @@ function Home(props) {
           <center>
             <div className="bottom-padding">
               <h1>Home Page</h1>
-              <span>Current User: </span>
+              <span>Current User: {props.currentUser} </span>
 
             </div>
           </center>
@@ -75,7 +65,7 @@ function Home(props) {
                                 <span className="text-dark">{question.id}</span>
                               </div>
                               <div className="col-5">
-                                <button className="btn btn-primary" onClick={() => { props.setCurrentPoll(poll?.id); navigate('/show-poll'); }}> Show Poll</button>
+                                <button className="btn btn-primary" onClick={() => { navigate('/answer-poll/'+question.id); }}> Show Poll</button>
                               </div>
                             </div>)
                           })
@@ -101,7 +91,7 @@ function Home(props) {
                                   <span className="text-dark">{question.id}</span>
                                 </div>
                                 <div className="col-5">
-                                  <button className="btn btn-primary" onClick={() => { props.setCurrentPoll(poll?.id); navigate('/show-poll'); }}> Show Poll</button>
+                                  <button className="btn btn-primary" onClick={() => { navigate('/answer-poll/'+question.id); }}> Show Poll</button>
                                 </div>
                               </div>)
                             })

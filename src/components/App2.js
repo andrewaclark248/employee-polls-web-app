@@ -60,10 +60,10 @@ function App2(props) {
                 } />
 
 
-                <Route path="show-poll" element={
+                <Route path="answer-poll/:question_id" element={
                   <React.Fragment>
                     <AppNavBar />
-                    <ShowPoll currentPoll={currentPoll} allPolls={props.allPolls} showNotificationBox={setShow} setAlertText={setAlertText}/>
+                    <ShowPoll showNotificationBox={setShow} setAlertText={setAlertText}/>
                   </React.Fragment>
                 } />
 
