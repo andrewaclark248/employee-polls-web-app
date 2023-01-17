@@ -7,9 +7,9 @@ import { Link } from "react-router-dom";
 
 const options = [
     { value: 'sarahedo', label: 'Sarah Edo' },
-    { value: 'tylermcGinnis', label: 'Tyler McGinnis' },
-    { value: 'miketsamis', label: 'Mike Tsamis', },
-    { value: 'zenobiaoshikanlu', label: 'Zenobia Oshikanlu', }
+    { value: 'tylermcginnis', label: 'Tyler McGinnis' },
+    { value: 'mtsamis', label: 'Mike Tsamis', },
+    { value: 'zoshikanlu', label: 'Zenobia Oshikanlu', }
   ]
 
 function Login(props) {

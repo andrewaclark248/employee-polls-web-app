@@ -3,14 +3,14 @@ import { useState } from 'react';
 //import { UPDATE_POLL_TYPE } from "../redux/actions/pollActions.js"
 import { connect } from "react-redux";
 import { useNavigate, useParams } from 'react-router-dom';
-import { getAvatar, getUserNamePretty } from "./../utils/util.js"
+import { ANSWER_QUESTION } from './../redux/actions/questionAction.js'
+import { _saveQuestionAnswer } from './../DATA.js'
 
 
 function ShowPoll(props) {
     const navigate = useNavigate();
     var params = useParams();
     var questionId = params.question_id;
-    console.log("params", params)
     var [pollChoice, setPollChoice] = useState("");
 
     var questionKeys = Object.keys(props.questions)
@@ -21,8 +21,6 @@ function ShowPoll(props) {
             question = currentQuestion;
         }
     })
-
-    console.log("question", question)
 
     let options = [
         { value: "optionOne", label: question.optionOne.text },
@@ -64,7 +62,7 @@ function ShowPoll(props) {
                                 <Select options={options} onChange={(e) => setPollChoice(e.value)} />
                             </div>
                             <div className="pb-3">
-                                <button className="btn btn-primary" onClick={() => { props.setAlertText("You updated your Poll!"); props.showNotificationBox(true); anwserPoll(pollChoice, props, getPoll?.id);  navigate('/home');  }}>Update Poll</button>
+                                <button className="btn btn-primary" onClick={() => { props.setAlertText("You updated your Poll!"); props.showNotificationBox(true); anwserPoll(props.currentUser, question.id, pollChoice);  navigate('/home');  }}>Update Poll</button>
                             </div>
                         </div>
                     </div>
@@ -78,8 +76,14 @@ function ShowPoll(props) {
 }
 
 //validation
-function anwserPoll(pollChoice, props, pollId) {
-    if (pollChoice != "") {
+async function anwserPoll( authedUser, qid, answer) {
+    console.log("authedUser = "+ authedUser)
+    if (answer != "") {
+        //call api
+        var result = await _saveQuestionAnswer({authedUser, qid, answer})
+        console.log("result = ", result)
+        //call reducer
+
         //props.dispatch({type: UPDATE_POLL_TYPE, payload: {pollId: pollId, pollChoice: pollChoice}})
     }
 }  

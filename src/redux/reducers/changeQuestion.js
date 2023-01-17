@@ -1,5 +1,5 @@
 import { initialQuestions } from '../../initialQuestions'
-import { CREATE_QUESTION } from './../actions/questionAction.js'
+import { CREATE_QUESTION, ANSWER_QUESTION } from './../actions/questionAction.js'
 
 const initialState = {
 	questions: initialQuestions
@@ -14,6 +14,8 @@ export const changeQuestion = (state = initialState, action) => {
 			...state,
 			questions: state.questions
 		}
+    } else if (action.type == ANSWER_QUESTION) {
+
     } else {
         return state;
     }
