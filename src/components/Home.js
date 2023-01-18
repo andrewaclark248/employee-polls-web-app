@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 function Home(props) { 
     const navigate = useNavigate();
-    //console.log("questions = ", props.questions)
+    console.log("questions = ", props.questions["8xf0y6ziyjabvozdd253nd"])
 
     var unansweredQuestions = getUnansweredQuestions(props.questions, props.currentUser)
     var answeredQuestions = getAnsweredQuestions(props.questions, props.currentUser)

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { connect } from "react-redux";
 import { useNavigate, useParams } from 'react-router-dom';
 import { ANSWER_QUESTION } from './../redux/actions/questionAction.js'
+import { UPDATE_USER_ANSWER } from './../redux/actions/changeUser.js'
 import { _saveQuestionAnswer } from './../DATA.js'
 
 
@@ -62,7 +63,7 @@ function ShowPoll(props) {
                                 <Select options={options} onChange={(e) => setPollChoice(e.value)} />
                             </div>
                             <div className="pb-3">
-                                <button className="btn btn-primary" onClick={() => { props.setAlertText("You updated your Poll!"); props.showNotificationBox(true); anwserPoll(props.currentUser, question.id, pollChoice);  navigate('/home');  }}>Update Poll</button>
+                                <button className="btn btn-primary" onClick={() => { props.setAlertText("You updated your Poll!"); props.showNotificationBox(true); anwserPoll(props, props.currentUser, question.id, pollChoice);  navigate('/home');  }}>Update Poll</button>
                             </div>
                         </div>
                     </div>
@@ -76,15 +77,15 @@ function ShowPoll(props) {
 }
 
 //validation
-async function anwserPoll( authedUser, qid, answer) {
+async function anwserPoll(props, authedUser, qid, answer) {
     console.log("authedUser = "+ authedUser)
     if (answer != "") {
         //call api
         var result = await _saveQuestionAnswer({authedUser, qid, answer})
-        console.log("result = ", result)
-        //call reducer
-
-        //props.dispatch({type: UPDATE_POLL_TYPE, payload: {pollId: pollId, pollChoice: pollChoice}})
+        if (result) {
+            props.dispatch({type: ANSWER_QUESTION, payload: {questionId: qid, authedUser: authedUser, answer}})
+            //UPDATE_USER_ANSWER
+        }
     }
 }  
 
