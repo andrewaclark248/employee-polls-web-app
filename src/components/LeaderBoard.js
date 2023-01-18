@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 
 function LeaderBoard(props) {
     var result = getUserStats(props.allUsers, props.questions, props.currentUser)
-    sortUsers(result);
+    var users = sortUsers(result);
+    console.log("users", result) 
     return (
         <div>
             <div className="row">
@@ -28,7 +29,21 @@ function LeaderBoard(props) {
                                     </tr>
                                 </thead>
                                 <tbody>
-     
+                                    {
+                                            users?.map((stat, index) => {
+                                                return (
+                                                    <tr key={index}>
+                                                        <td>{stat.user}</td>
+                                                        <td>
+                                                            <span>pic</span>
+                                                        </td>
+                                                        <td>{stat.numOfQuestionsAsked}</td>
+                                                        <td>{stat.numOfQuestionsAnswered}</td>
+                                                    </tr>
+                                                );
+                                            })
+
+                                    }
                                 </tbody>
                             </table>
                         </div>
@@ -53,8 +68,8 @@ function getUserStats(allUsers, questions, currentUser) {
             numOfQuestionsAnswered: null,
             avatarUrl: null
         }
-        var questionAnswered = user.questions.length;
-        var questionsAsked = numberOfQuestionsAsked(questions, currentUser)
+        var questionAnswered = Object.keys(allUsers[user.id].answers).length
+        var questionsAsked = numberOfQuestionsAsked(questions, user.id)
         tempUser.user = user.id;
         tempUser.numOfQuestionsAnswered = questionAnswered;
         tempUser.numOfQuestionsAsked = questionsAsked;
@@ -81,9 +96,7 @@ function sortUsers(users) {
         var user2Total = b.numOfQuestionsAnswered + b.numOfQuestionsAsked;
         return user2Total - user1Total;
     });
-    console.log("result", result)
-    console.log("users", users)
-
+    return result;
 } 
 
 
