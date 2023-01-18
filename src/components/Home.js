@@ -8,7 +8,8 @@ function Home(props) {
 
     var unansweredQuestions = getUnansweredQuestions(props.questions, props.currentUser)
     var answeredQuestions = getAnsweredQuestions(props.questions, props.currentUser)
-
+  
+    console.log("users", Object.keys(props.allUsers["tylermcginnis"].answers).length)
     //await getQuestions()
     /**
     var userUnansweredPolls = null;
