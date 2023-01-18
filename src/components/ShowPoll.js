@@ -78,13 +78,11 @@ function ShowPoll(props) {
 
 //validation
 async function anwserPoll(props, authedUser, qid, answer) {
-    console.log("authedUser = "+ authedUser)
     if (answer != "") {
-        //call api
         var result = await _saveQuestionAnswer({authedUser, qid, answer})
         if (result) {
-            props.dispatch({type: ANSWER_QUESTION, payload: {questionId: qid, authedUser: authedUser, answer}})
-            //UPDATE_USER_ANSWER
+            props.dispatch({type: ANSWER_QUESTION, payload: {questionId: qid, authedUser: authedUser, answer: answer}})
+            props.dispatch({type: UPDATE_USER_ANSWER, payload: {questionId: qid, authedUser: authedUser, answer: answer}})
         }
     }
 }  
