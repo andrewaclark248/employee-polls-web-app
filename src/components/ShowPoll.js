@@ -1,26 +1,33 @@
 import Select from 'react-select'
 import { useState } from 'react';
-import { UPDATE_POLL_TYPE } from "../redux/actions/pollActions.js"
+//import { UPDATE_POLL_TYPE } from "../redux/actions/pollActions.js"
 import { connect } from "react-redux";
-import { HOME_PAGE } from "../redux/actions/changePageAction.js"
-import { useNavigate } from 'react-router-dom';
-import { getAvatar, getUserNamePretty } from "./../utils/util.js"
+import { useNavigate, useParams } from 'react-router-dom';
+import { ANSWER_QUESTION } from './../redux/actions/questionAction.js'
+import { UPDATE_USER_ANSWER } from './../redux/actions/changeUser.js'
+import { _saveQuestionAnswer } from './../DATA.js'
 
 
 function ShowPoll(props) {
     const navigate = useNavigate();
-
+    var params = useParams();
+    var questionId = params.question_id;
     var [pollChoice, setPollChoice] = useState("");
-    let getPoll = props.userPolls.filter((poll) => {
-        return poll.id == props.currentPoll
-    })[0]
 
+    var questionKeys = Object.keys(props.questions)
+    var question = null;
+    questionKeys.forEach((questionKey) => {
+        var currentQuestion = props.questions[questionKey]
+        if (currentQuestion.id == questionId) {
+            question = currentQuestion;
+        }
+    })
 
     let options = [
-        { value: getPoll.firstOption, label: getPoll.firstOption },
-        { value: getPoll.secondOption, label: getPoll.secondOption }
+        { value: "optionOne", label: question.optionOne.text },
+        { value: "optionTwo", label: question.optionTwo.text }
       ]
-    var picture = getAvatar(props.currentUser)
+    //var picture = getAvatar(props.currentUser)
 
     return (
         <div>
@@ -28,8 +35,7 @@ function ShowPoll(props) {
             <div className="row bottom-padding">
             <div className="col-4"></div>
             <div className="col-4">
-                <span>Current User: <span className='fw-bold'>{getUserNamePretty(props.currentUser)}</span></span>
-                <img src={picture} height={100} width={100} />
+                <span>Current User: <span className='fw-bold'>{props.currentUser}</span></span>
             </div>
             <div className="col-4"></div>
             </div>
@@ -43,25 +49,21 @@ function ShowPoll(props) {
                         <div className="card-body">
                             <div className="pb-3">
                                 <label className="">Poll ID</label>
-                                <input className="form-control"  disabled={true} value={getPoll.id}/>
-                            </div>
-                            <div className="pb-3">
-                                <label className="">Poll Name</label>
-                                <input className="form-control"  disabled={true} value={getPoll.pollName}/>
+                                <input className="form-control"  disabled={true} value={question.id}/>
                             </div>
                             <div className="pb-3">
                                 <label className="">First Choice</label>
-                                <input className="form-control"  disabled={true} value={getPoll.firstOption}/>
+                                <input className="form-control"  disabled={true} value={question.optionOne.text}/>
                             </div>
                             <div className="pb-3">
                                 <label className="">Second Choice</label>
-                                <input className="form-control"  disabled={true} value={getPoll.secondOption}/>
+                                <input className="form-control"  disabled={true} value={question.optionTwo.text}/>
                             </div>
                             <div className="pb-3">
                                 <Select options={options} onChange={(e) => setPollChoice(e.value)} />
                             </div>
                             <div className="pb-3">
-                                <button className="btn btn-primary" onClick={() => { props.setAlertText("You updated your Poll!"); props.showNotificationBox(true); anwserPoll(pollChoice, props, getPoll.id);  navigate('/home');  }}>Update Poll</button>
+                                <button className="btn btn-primary" onClick={() => { props.setAlertText("You updated your Poll!"); props.showNotificationBox(true); anwserPoll(props, props.currentUser, question.id, pollChoice, navigate);   }}>Update Poll</button>
                             </div>
                         </div>
                     </div>
@@ -75,15 +77,20 @@ function ShowPoll(props) {
 }
 
 //validation
-function anwserPoll(pollChoice, props, pollId) {
-    if (pollChoice != "") {
-        props.dispatch({type: UPDATE_POLL_TYPE, payload: {pollId: pollId, pollChoice: pollChoice}})
+async function anwserPoll(props, authedUser, qid, answer, navigate) {
+    if (answer != "") {
+        var result = await _saveQuestionAnswer({authedUser, qid, answer})
+        if (result) {
+            props.dispatch({type: ANSWER_QUESTION, payload: {questionId: qid, authedUser: authedUser, answer: answer}})
+            props.dispatch({type: UPDATE_USER_ANSWER, payload: {questionId: qid, authedUser: authedUser, answer: answer}})
+            navigate('/home'); 
+        }
     }
 }  
 
 export default connect((state) => ({
     currentUser: state.loginUser.currentUser,
-    userPolls: state.polls.userPolls
+    questions: state.questions.questions
 }), null)(ShowPoll);
 
 

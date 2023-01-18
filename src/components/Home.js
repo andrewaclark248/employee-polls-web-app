@@ -1,11 +1,16 @@
 import { connect } from "react-redux";
-import { SHOW_POLL_PAGE, ANWSERED_POLL_PAGE} from "../redux/actions/changePageAction.js"
-import AppNavBar from './Navbar.js';
 import { useNavigate } from 'react-router-dom';
-import { unansweredPolls, awnseredPolls, getUserNamePretty, getAvatar } from "./../utils/util.js"
+import { _getQuestions } from './../DATA.js'
+import { useEffect } from "react";
 
 function Home(props) { 
     const navigate = useNavigate();
+
+    var unansweredQuestions = getUnansweredQuestions(props.questions, props.currentUser)
+    var answeredQuestions = getAnsweredQuestions(props.questions, props.currentUser)
+
+    //await getQuestions()
+    /**
     var userUnansweredPolls = null;
     var userAnwseredPolls = null;
     if (props.userPolls?.length > 0) {
@@ -28,14 +33,14 @@ function Home(props) {
 
     //get avatar
     var picture = getAvatar(props.currentUser)
+     */
 
     return (
       <div>
           <center>
             <div className="bottom-padding">
               <h1>Home Page</h1>
-              <span>Current User: {userName}</span>
-              <img src={picture} height={100} width={100} />
+              <span>Current User: {props.currentUser} </span>
 
             </div>
           </center>
@@ -49,20 +54,20 @@ function Home(props) {
                 <div className="card-body">
 
                   <div className="">
-                    {sortedUserUnansweredPolls != null && sortedUserUnansweredPolls[0] != undefined &&
-                        sortedUserUnansweredPolls.map((poll, index) => {
-                          return (<div className="row pb-3" key={index}>
-                            <div className="col-2">
-                              <span className="text-dark">{(index+1).toString()}.</span>
-                            </div>
-                            <div className="col-5">
-                              <span className="text-dark">{poll?.pollName}</span>
-                            </div>
-                            <div className="col-5">
-                              <button className="btn btn-primary" onClick={() => { props.setCurrentPoll(poll.id); navigate('/show-poll'); }}> Show Poll</button>
-                            </div>
-                          </div>)
-                        })
+                    {unansweredQuestions != null && unansweredQuestions[0] != undefined &&
+                          unansweredQuestions.map((question, index) => {
+                            return (<div className="row pb-3" key={index}>
+                              <div className="col-2">
+                                <span className="text-dark">{(index+1).toString()}.</span>
+                              </div>
+                              <div className="col-5">
+                                <span className="text-dark">{question.id}</span>
+                              </div>
+                              <div className="col-5">
+                                <button className="btn btn-primary" onClick={() => { navigate('/answer-poll/'+question.id); }}> Show Poll</button>
+                              </div>
+                            </div>)
+                          })
                     }
                   </div>
                 </div>
@@ -75,20 +80,20 @@ function Home(props) {
                 <div className="card-body">
 
                   <div className="">
-                    {sortedUserAnwseredPolls != null && sortedUserAnwseredPolls[0] != undefined &&
-                      sortedUserAnwseredPolls.map((poll, index) => {
-                        return (<div className="row pb-3" key={index}>
-                          <div className="col-2">
-                            <span className="text-dark">{(index+1).toString()}.</span>
-                          </div>
-                          <div className="col-5">
-                            <span className="text-dark">{poll?.pollName}</span>
-                          </div>
-                          <div className="col-5">
-                            <button className="btn btn-primary" onClick={() => { props.setCurrentPoll(poll.id); navigate('/questions/'+poll?.id); }}> Show Poll</button>
-                          </div>
-                        </div>)
-                      })
+                    {answeredQuestions != null && answeredQuestions[0] != undefined &&
+                            answeredQuestions.map((question, index) => {
+                              return (<div className="row pb-3" key={index}>
+                                <div className="col-2">
+                                  <span className="text-dark">{(index+1).toString()}.</span>
+                                </div>
+                                <div className="col-5">
+                                  <span className="text-dark">{question.id}</span>
+                                </div>
+                                <div className="col-5">
+                                  <button className="btn btn-primary" onClick={() => { navigate('/answer-poll/'+question.id); }}> Show Poll</button>
+                                </div>
+                              </div>)
+                            })
                     }
                   </div>
 
@@ -101,9 +106,50 @@ function Home(props) {
     );
   }
 
+
+async function getQuestions() {
+  _getQuestions.then((data) => {
+    console.log("get questions", data)
+  })
+  .catch((error) => {
+    console.log("error", error)
+  })
+}
+
+function getUnansweredQuestions(questions, currentUser) {
+  var questionKeys = Object.keys(questions)
+  var unansweredQuestions = questionKeys.map((questionKey) => {
+    var question = questions[questionKey]
+    if (!question.optionOne.votes.includes(currentUser) && !question.optionTwo.votes.includes(currentUser)) {
+      return question;
+    }
+  })
+  //remove undefineds
+  unansweredQuestions = unansweredQuestions.filter((question) => {
+    return question != undefined
+  })
+  return unansweredQuestions;
+}
+
+function getAnsweredQuestions(questions, currentUser) {
+  var questionKeys = Object.keys(questions)
+  var answeredQuestions = questionKeys.map((questionKey) => {
+    var question = questions[questionKey]
+    if (question.optionOne.votes.includes(currentUser) || question.optionTwo.votes.includes(currentUser)) {
+      return question;
+    } else {
+      return
+    }
+  })
+  //remove undefineds
+  answeredQuestions = answeredQuestions.filter((question) => {
+    return question != undefined
+  })
+  return answeredQuestions;
+}
   
 export default connect((state) => ({
+  allUsers: state.users.allUsers,
   currentUser: state.loginUser.currentUser,
-  originalPolls: state.polls.originalPolls,
-  userPolls: state.polls.userPolls
+  questions: state.questions.questions
 }))(Home);

@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
-import { loginUser } from './loginUser.js';
-import { changePage } from './changePage.js';
-import { changePoll } from './changePoll.js';
 
+import { loginUser } from './loginUser.js';
+import { changeUser } from './changeUser.js'
+import { changeQuestion } from './changeQuestion.js' 
 
 const rootReducer = combineReducers({
-	changePage: changePage,
 	loginUser: loginUser,
-	polls: changePoll
+	users: changeUser,
+	questions: changeQuestion
 })
 
 export default rootReducer;

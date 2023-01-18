@@ -4,7 +4,6 @@ import Home from './Home.js';
 import Login from './Login.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { connect } from "react-redux";
-import { LOGIN_PAGE, HOME_PAGE, NEW_POLL_PAGE, SHOW_POLL_PAGE, ANWSERED_POLL_PAGE } from "../redux/actions/changePageAction.js"
 import AppNavBar from './Navbar.js';
 import NewPoll from './NewPoll.js';
 import NotificationBox from './NotificationBox.js';
@@ -61,10 +60,10 @@ function App2(props) {
                 } />
 
 
-                <Route path="show-poll" element={
+                <Route path="answer-poll/:question_id" element={
                   <React.Fragment>
                     <AppNavBar />
-                    <ShowPoll currentPoll={currentPoll} allPolls={props.allPolls} showNotificationBox={setShow} setAlertText={setAlertText}/>
+                    <ShowPoll showNotificationBox={setShow} setAlertText={setAlertText}/>
                   </React.Fragment>
                 } />
 
@@ -86,9 +85,7 @@ function App2(props) {
 //
 
 export default connect((state) => ({
-	currentPage: state.changePage.currentPage,
 	currentUser: state.loginUser.currentUser,
-	allPolls: state.polls.allPolls
 
 }))(App2);
 

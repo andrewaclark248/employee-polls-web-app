@@ -16,3 +16,4 @@ export const loginUser = (state = initialState, action) => {
 		default: return state
 	}
 }
+
