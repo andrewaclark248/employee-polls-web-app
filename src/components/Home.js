@@ -9,7 +9,6 @@ function Home(props) {
     var unansweredQuestions = getUnansweredQuestions(props.questions, props.currentUser)
     var answeredQuestions = getAnsweredQuestions(props.questions, props.currentUser)
 
-    console.log(props.allUsers[props.currentUser].answers)
     //await getQuestions()
     /**
     var userUnansweredPolls = null;

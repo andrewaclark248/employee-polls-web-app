@@ -63,7 +63,7 @@ function ShowPoll(props) {
                                 <Select options={options} onChange={(e) => setPollChoice(e.value)} />
                             </div>
                             <div className="pb-3">
-                                <button className="btn btn-primary" onClick={() => { props.setAlertText("You updated your Poll!"); props.showNotificationBox(true); anwserPoll(props, props.currentUser, question.id, pollChoice);  navigate('/home');  }}>Update Poll</button>
+                                <button className="btn btn-primary" onClick={() => { props.setAlertText("You updated your Poll!"); props.showNotificationBox(true); anwserPoll(props, props.currentUser, question.id, pollChoice, navigate);   }}>Update Poll</button>
                             </div>
                         </div>
                     </div>
@@ -77,12 +77,13 @@ function ShowPoll(props) {
 }
 
 //validation
-async function anwserPoll(props, authedUser, qid, answer) {
+async function anwserPoll(props, authedUser, qid, answer, navigate) {
     if (answer != "") {
         var result = await _saveQuestionAnswer({authedUser, qid, answer})
         if (result) {
             props.dispatch({type: ANSWER_QUESTION, payload: {questionId: qid, authedUser: authedUser, answer: answer}})
             props.dispatch({type: UPDATE_USER_ANSWER, payload: {questionId: qid, authedUser: authedUser, answer: answer}})
+            navigate('/home'); 
         }
     }
 }  
