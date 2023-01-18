@@ -1,10 +1,9 @@
 import { connect } from "react-redux";
-import { getUserNamePretty, getAvatar, getUserStats, sortStats } from "./../utils/util.js"
 
 
 function LeaderBoard(props) {
-    let userStats = getUserStats(props.userPolls, props.originalPolls)
-    var sortedStats = sortStats(userStats);
+    var result = getUserStats(props.allUsers, props.questions, props.currentUser)
+    sortUsers(result);
     return (
         <div>
             <div className="row">
@@ -29,21 +28,7 @@ function LeaderBoard(props) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {
-                                        sortedStats.map((stat, index) => {
-                                            return (
-                                                <tr key={index}>
-                                                    <td>{getUserNamePretty(stat.user)}</td>
-                                                    <td>
-                                                        <img src={getAvatar(stat.user)} height={20} width={20} />
-                                                    </td>
-                                                    <td>{stat.numberOfQuestionsAsked}</td>
-                                                    <td>{stat.numberOfQuestionsAnswered}</td>
-                                                </tr>
-                                            );
-                                        })
-
-                                    }
+     
                                 </tbody>
                             </table>
                         </div>
@@ -57,10 +42,53 @@ function LeaderBoard(props) {
 
 }
 
+function getUserStats(allUsers, questions, currentUser) {
+    var users = [];
+    var userKeys = Object.keys(allUsers)
+    userKeys.forEach((key) => {
+        var user = allUsers[key]
+        var tempUser = {
+            user: null,
+            numOfQuestionsAsked: null,
+            numOfQuestionsAnswered: null,
+            avatarUrl: null
+        }
+        var questionAnswered = user.questions.length;
+        var questionsAsked = numberOfQuestionsAsked(questions, currentUser)
+        tempUser.user = user.id;
+        tempUser.numOfQuestionsAnswered = questionAnswered;
+        tempUser.numOfQuestionsAsked = questionsAsked;
+        users.push(tempUser);
+    })
+    return users;
+}
+
+function numberOfQuestionsAsked(questions, currentUser) {
+    var questionKeys = Object.keys(questions);
+    var totalQuestionsAsked = 0
+    questionKeys.forEach((key) => {
+        var question = questions[key]
+        if (question.author == currentUser) {
+            totalQuestionsAsked = totalQuestionsAsked + 1;
+        }
+    })
+    return totalQuestionsAsked;
+}
+
+function sortUsers(users) {
+    var result = users.sort(function(a, b) {
+        var user1Total = a.numOfQuestionsAnswered + a.numOfQuestionsAsked;
+        var user2Total = b.numOfQuestionsAnswered + b.numOfQuestionsAsked;
+        return user2Total - user1Total;
+    });
+    console.log("result", result)
+    console.log("users", users)
+
+} 
 
 
 export default connect((state) => ({
     currentUser: state.loginUser.currentUser,
-    userPolls: state.polls.userPolls,
-    originalPolls: state.polls.originalPolls
+    allUsers: state.users.allUsers,
+    questions: state.questions.questions
   }))(LeaderBoard);
