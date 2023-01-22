@@ -9,7 +9,8 @@ function Home(props) {
     var unansweredQuestions = getUnansweredQuestions(props.questions, props.currentUser)
     var answeredQuestions = getAnsweredQuestions(props.questions, props.currentUser)
   
-    console.log("users", Object.keys(props.allUsers["tylermcginnis"].answers).length)
+    var sortedUnansweredQuestions = sortQuestions(unansweredQuestions)
+    var sortedAnsweredQuestions = sortQuestions(answeredQuestions)
     //await getQuestions()
     /**
     var userUnansweredPolls = null;
@@ -55,16 +56,19 @@ function Home(props) {
                 <div className="card-body">
 
                   <div className="">
-                    {unansweredQuestions != null && unansweredQuestions[0] != undefined &&
-                          unansweredQuestions.map((question, index) => {
+                    {sortedUnansweredQuestions != null && sortedUnansweredQuestions[0] != undefined &&
+                          sortedUnansweredQuestions.map((question, index) => {
                             return (<div className="row pb-3" key={index}>
                               <div className="col-2">
                                 <span className="text-dark">{(index+1).toString()}.</span>
                               </div>
-                              <div className="col-5">
+                              <div className="col-4">
                                 <span className="text-dark">{question.id}</span>
                               </div>
-                              <div className="col-5">
+                              <div className="col-3">
+                                <span className="text-dark">{new Date(question.timestamp).toDateString()}</span>
+                              </div>
+                              <div className="col-3">
                                 <button className="btn btn-primary" onClick={() => { navigate('/answer-poll/'+question.id); }}> Show Poll</button>
                               </div>
                             </div>)
@@ -81,16 +85,19 @@ function Home(props) {
                 <div className="card-body">
 
                   <div className="">
-                    {answeredQuestions != null && answeredQuestions[0] != undefined &&
-                            answeredQuestions.map((question, index) => {
+                    {sortedAnsweredQuestions != null && sortedAnsweredQuestions[0] != undefined &&
+                            sortedAnsweredQuestions.map((question, index) => {
                               return (<div className="row pb-3" key={index}>
                                 <div className="col-2">
                                   <span className="text-dark">{(index+1).toString()}.</span>
                                 </div>
-                                <div className="col-5">
+                                <div className="col-4">
                                   <span className="text-dark">{question.id}</span>
                                 </div>
-                                <div className="col-5">
+                                <div className="col-3">
+                                  <span className="text-dark">{new Date(question.timestamp).toDateString()}</span>
+                                </div>
+                                <div className="col-3">
                                   <button className="btn btn-primary" onClick={() => { navigate('/answer-poll/'+question.id); }}> Show Poll</button>
                                 </div>
                               </div>)
@@ -106,6 +113,14 @@ function Home(props) {
       </div>
     );
   }
+
+
+function sortQuestions(questions) {
+  questions.sort((a, b) => {
+    return (b.timestamp - a.timestamp)
+  })
+  return questions;
+}
 
 
 async function getQuestions() {
