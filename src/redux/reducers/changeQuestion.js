@@ -8,6 +8,7 @@ const initialState = {
 export const changeQuestion = (state = initialState, action) => {
 
     if (action.type == CREATE_QUESTION) {
+        console.log("went to question reducer")
         state.questions[action.payload.question.id] = action.payload.question;
 
         return {
@@ -18,6 +19,7 @@ export const changeQuestion = (state = initialState, action) => {
         //var question = state.questions.filter((question) => {
         //    return question.id == action.type.questionId
         //})
+        console.log("went to question reducer")
 
         if (action.payload.answer == "optionOne") {
             state.questions[action.payload.questionId].optionOne.votes.push(action.payload.authedUser)
