@@ -9,6 +9,7 @@ function Home(props) {
     var unansweredQuestions = getUnansweredQuestions(props.questions, props.currentUser)
     var answeredQuestions = getAnsweredQuestions(props.questions, props.currentUser)
   
+
     var sortedUnansweredQuestions = sortQuestions(unansweredQuestions)
     var sortedAnsweredQuestions = sortQuestions(answeredQuestions)
     //await getQuestions()
@@ -69,7 +70,7 @@ function Home(props) {
                                 <span className="text-dark">{new Date(question.timestamp).toDateString()}</span>
                               </div>
                               <div className="col-3">
-                                <button className="btn btn-primary" onClick={() => { navigate('/answer-poll/'+question.id); }}> Show Poll</button>
+                                <button className="btn btn-primary" onClick={() => { props.setPollPage("unAnsweredQuestion"); navigate('/questions/'+question.id); }}> Show Poll</button>
                               </div>
                             </div>)
                           })
@@ -98,7 +99,7 @@ function Home(props) {
                                   <span className="text-dark">{new Date(question.timestamp).toDateString()}</span>
                                 </div>
                                 <div className="col-3">
-                                  <button className="btn btn-primary" onClick={() => { navigate('/answer-poll/'+question.id); }}> Show Poll</button>
+                                  <button className="btn btn-primary" onClick={() => { props.setPollPage("answeredQuestion"); navigate('/questions/'+question.id); }}> Show Poll</button>
                                 </div>
                               </div>)
                             })

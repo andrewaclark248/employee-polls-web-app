@@ -18,17 +18,16 @@ export const changeQuestion = (state = initialState, action) => {
         //var question = state.questions.filter((question) => {
         //    return question.id == action.type.questionId
         //})
-
+        var updatedQuestions = {...state.questions}
         if (action.payload.answer == "optionOne") {
-            state.questions[action.payload.questionId].optionOne.votes.push(action.payload.authedUser)
-
+            updatedQuestions[action.payload.questionId].optionOne.votes.push(action.payload.authedUser)
         } else if (action.payload.answer == "optionTwo" ) {
-            state.questions[action.payload.questionId].optionTwo.votes.push(action.payload.authedUser)
+            updatedQuestions[action.payload.questionId].optionTwo.votes.push(action.payload.authedUser)
         }
 
         return {
 			...state,
-			questions: state.questions
+			questions: updatedQuestions
 		}
 
     } else {
