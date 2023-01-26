@@ -14,31 +14,14 @@ function Home(props) {
 
     var sortedUnansweredQuestions = sortQuestions(unansweredQuestions)
     var sortedAnsweredQuestions = sortQuestions(answeredQuestions)
-    //await getQuestions()
-    /**
-    var userUnansweredPolls = null;
-    var userAnwseredPolls = null;
-    if (props.userPolls?.length > 0) {
-      var currentUserPolls = props.userPolls.filter((poll) => {
-        return poll.user == props.currentUser;
-    })
-
-      userUnansweredPolls = unansweredPolls(currentUserPolls, props.currentUser)
-      userAnwseredPolls = awnseredPolls(currentUserPolls, props.currentUser)
+    
+    if (props.currentUser == "none" || props.currentUser == undefined) {
+      setTimeout(()=>{
+          navigate('/');
+        }, 100)
+      return;
     }
 
-    //sort unawnsered polls
-    let sortedUserUnansweredPolls = userUnansweredPolls?.sort((a, b) =>  {return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()})
-
-    //sort awnsered polls
-    let sortedUserAnwseredPolls = userAnwseredPolls?.sort((a, b) =>  {return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()})
-
-    //pretty user name
-    var userName = getUserNamePretty(props.currentUser)
-
-    //get avatar
-    var picture = getAvatar(props.currentUser)
-     */
 
     return (
       <div>
@@ -52,7 +35,7 @@ function Home(props) {
           <div className="row pb-5">
             <div className="col-4"></div>
             <div className="col-4">
-              <div class="d-grid gap-2">
+              <div className="d-grid gap-2">
                 <button className="btn btn-primary" type="button" onClick={() => {
                   setShowUnansweredQuestions(!showUnansweredQuestions)
                   setShowAnsweredQuestions(!showAnsweredQuestions)

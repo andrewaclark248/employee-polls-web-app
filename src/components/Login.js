@@ -13,6 +13,7 @@ const options = [
   ]
 
 function Login(props) {
+    console.log("went to login page")
     return (
     <div>
         <center>

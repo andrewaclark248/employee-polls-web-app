@@ -10,6 +10,13 @@ import { useNavigate } from 'react-router-dom'
 function Poll(props) {
     const navigate = useNavigate()
 
+    if (props.currentUser == "none" || props.currentUser == undefined) {
+        setTimeout(()=>{
+            navigate('/');
+          }, 100)
+        return;
+    }
+  
     let { question_id } = useParams();
     let [pollChoice, setPollChoice] = useState(null);
     let [questionAnswered, setQuestionAnswered] = useState(false);
@@ -167,10 +174,6 @@ function questionAnsweredMethod(question, currentUser) {
     })
     var optOne = question.optionOne.votes.includes(currentUser)
     var optTwo = question.optionTwo.votes.includes(currentUser)
-    //onsole.log("currentUser = ", currentUser)
-    //console.log("optOne = ", typeof question.optionOne.votes)
-    //console.log("optTwo = ", question.optionTwo.votes)
-    //console.log("question = ", question.optionOne.votes.length)
 
     if (optOne || optTwo) {
         return true;
