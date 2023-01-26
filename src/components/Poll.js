@@ -59,7 +59,7 @@ function Poll(props) {
 
 
     return (
-        <div>
+        <div >
             <h1 className="">Show Poll</h1>
             <div className="row bottom-padding">
             <div className="col-4"></div>
@@ -68,7 +68,7 @@ function Poll(props) {
             </div>
             <div className="col-4"></div>
             </div>
-            <div className="row">
+            <div className="row pb-5">
                 <div className="col-3"></div>
                 <div className="col-6">
                     <div className="card">
@@ -129,7 +129,7 @@ function Poll(props) {
                                 <div className="row">
                                     <div className="col-8">
                                         <span>
-                                            Percent of people who voted for <span className="fw-bold"><u>{"sadf"}</u></span> answer: 
+                                            Percent of people who voted for <span className="fw-bold"><u>{pollChoice}</u></span> answer: 
                                         </span>
                                     </div>
                                     <div className="col-4">

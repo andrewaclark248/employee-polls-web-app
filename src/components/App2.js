@@ -51,19 +51,6 @@ function App2(props) {
                   </React.Fragment>
                 } />
 
-                <Route path="questions/:question_id" element={
-                  <React.Fragment>
-                    <AppNavBar />
-                    <AnwseredPoll currentPoll={currentPoll} />
-                  </React.Fragment>
-                } />
-
-                <Route path="questions/:question_id" element={
-                  <React.Fragment>
-                    <AppNavBar />
-                    <ShowPoll showNotificationBox={setShow} setAlertText={setAlertText} />
-                  </React.Fragment>
-                } />
 
                 <Route path="leaderboard" element={
                   <React.Fragment>
@@ -72,7 +59,7 @@ function App2(props) {
                   </React.Fragment>
                 } />
 
-                <Route path="random/:question_id" element={
+                <Route path="questions/:question_id" element={
                   <React.Fragment>
                     <AppNavBar />
                     <Poll />

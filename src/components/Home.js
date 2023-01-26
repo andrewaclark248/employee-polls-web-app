@@ -70,7 +70,7 @@ function Home(props) {
                                 <span className="text-dark">{new Date(question.timestamp).toDateString()}</span>
                               </div>
                               <div className="col-3">
-                                <button className="btn btn-primary" onClick={() => { props.setPollPage("unAnsweredQuestion"); navigate('/random/'+question.id); }}> Show Poll</button>
+                                <button className="btn btn-primary" onClick={() => { props.setPollPage("unAnsweredQuestion"); navigate('/questions/'+question.id); }}> Show Poll</button>
                               </div>
                             </div>)
                           })
@@ -99,7 +99,7 @@ function Home(props) {
                                   <span className="text-dark">{new Date(question.timestamp).toDateString()}</span>
                                 </div>
                                 <div className="col-3">
-                                  <button className="btn btn-primary" onClick={() => { props.setPollPage("answeredQuestion"); navigate('/random/'+question.id); }}> Show Poll</button>
+                                  <button className="btn btn-primary" onClick={() => { props.setPollPage("answeredQuestion"); navigate('/questions/'+question.id); }}> Show Poll</button>
                                 </div>
                               </div>)
                             })
