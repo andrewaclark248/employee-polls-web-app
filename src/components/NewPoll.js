@@ -8,9 +8,15 @@ import { _saveQuestion } from './../DATA.js'
 import { CREATE_QUESTION } from './../redux/actions/questionAction.js'
 
 function NewPoll(props) {
-  var [firstOption, setFirstOption] = useState("");
-  var [secondOption, setSecondOption] = useState("");
-  const navigate = useNavigate();
+    var [firstOption, setFirstOption] = useState("");
+    var [secondOption, setSecondOption] = useState("");
+    const navigate = useNavigate();
+    if (props.currentUser == "none" || props.currentUser == undefined) {
+        setTimeout(()=>{
+            navigate('/');
+          }, 100)
+        return;
+    }
 
     return (
     <div >

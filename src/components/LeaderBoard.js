@@ -1,10 +1,19 @@
 import { connect } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 
 
 function LeaderBoard(props) {
     var result = getUserStats(props.allUsers, props.questions, props.currentUser)
     var users = sortUsers(result);
-    console.log("users", result) 
+
+    const navigate = useNavigate();
+    if (props.currentUser == "none" || props.currentUser == undefined) {
+        setTimeout(()=>{
+            navigate('/');
+          }, 100)
+        return;
+    }
+
     return (
         <div>
             <div className="row">
