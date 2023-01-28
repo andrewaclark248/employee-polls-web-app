@@ -14,13 +14,6 @@ function Home(props) {
 
     var sortedUnansweredQuestions = sortQuestions(unansweredQuestions)
     var sortedAnsweredQuestions = sortQuestions(answeredQuestions)
-    
-    if (props.currentUser == "none" || props.currentUser == undefined) {
-      setTimeout(()=>{
-          navigate('/');
-        }, 100)
-      return;
-    }
 
 
     return (

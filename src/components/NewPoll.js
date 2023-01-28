@@ -11,12 +11,6 @@ function NewPoll(props) {
     var [firstOption, setFirstOption] = useState("");
     var [secondOption, setSecondOption] = useState("");
     const navigate = useNavigate();
-    if (props.currentUser == "none" || props.currentUser == undefined) {
-        setTimeout(()=>{
-            navigate('/');
-          }, 100)
-        return;
-    }
 
     return (
     <div >
@@ -54,9 +48,6 @@ function NewPoll(props) {
 
 
 async function onClickHandler(props, firstOption, secondOption) {
-    props.setAlertText("You created a New Poll!!!"); 
-    
-    props.showNotificationBox(true); 
     
     var question = {
         optionOneText: firstOption,
