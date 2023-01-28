@@ -75,8 +75,8 @@ function Poll(props) {
             <div className="col-4"></div>
             </div>
             <div className="row pb-5">
-                <div className="col-3"></div>
-                <div className="col-6">
+                <div className="col-2"></div>
+                <div className="col-8">
                     <div className="card">
                         <div className="card-header">
                             Answer Poll
@@ -87,28 +87,41 @@ function Poll(props) {
                                 <input className="form-control"  disabled={true} value={currentQuestion.id}/>
                             </div>
                             <div className="pb-3">
-                                <label className="">First Choice</label>
-                                <input className="form-control"  disabled={true} value={currentQuestion.optionOne.text}/>
-                            </div>
-                            <div className="pb-3">
-                                <label className="">Second Choice</label>
-                                <input className="form-control"  disabled={true} value={currentQuestion.optionTwo.text}/>
-                            </div>
-                            {!questionAnswered &&
-                                <div className="pb-3">
-                                    <Select options={options} onChange={(e) => setPollChoice(e.value)} />
+                                <div className="row">
+                                    <label className="">First Choice</label>
                                 </div>
-                            }
-
+                                <div className="row">
+                                    <div className="col-8">
+                                        <input className="form-control"  disabled={true} value={currentQuestion.optionOne.text}/>
+                                    </div>
+                                    <div className="col-4">
+                                        <button disabled={questionAnswered} className="btn btn-primary" onClick={() => { anwserPoll(props, props.currentUser, currentQuestion.id, "optionOne", navigate); setQuestionAnswered(true); setPollChoice("optionOne"); }}>
+                                            Option One
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                             <div className="pb-3">
-                                <button className="btn btn-primary" onClick={() => { anwserPoll(props, props.currentUser, currentQuestion.id, pollChoice, navigate); setQuestionAnswered(true)  }}>Update Poll</button>
+                                <div className="row">
+                                    <label className="">Second Choice</label>
+                                </div>
+                                <div className="row">
+                                    <div className="col-8">
+                                        <input className="form-control"  disabled={true} value={currentQuestion.optionTwo.text}/>
+                                    </div>
+                                    <div className="col-4">
+                                        <button disabled={questionAnswered} className="btn btn-primary" onClick={() => { anwserPoll(props, props.currentUser, currentQuestion.id, "optionTwo", navigate); setQuestionAnswered(true); setPollChoice("optionTwo"); }}>
+                                            Option Two
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
 
                 </div>
-                <div className="col-3"></div>
+                <div className="col-2"></div>
             </div>
 
             {questionAnswered &&
@@ -160,6 +173,7 @@ function Poll(props) {
 }
 
 function percentageVotedForAnswer(currentQuestion, pollChoice) {
+    console.log("percentage = ", currentQuestion)
     var demoninator = currentQuestion.optionOne.votes.length + currentQuestion.optionTwo.votes.length
     var numerator = (pollChoice == "optionOne" ? currentQuestion.optionOne.votes.length : currentQuestion.optionTwo.votes.length)
     var percentage = (numerator/demoninator)*100
@@ -168,9 +182,6 @@ function percentageVotedForAnswer(currentQuestion, pollChoice) {
 
 function questionAnsweredMethod(question, currentUser) {
     var isTrue = false;
-    question.optionOne.votes.forEach((user) => {
-        //console.log("user = " + user)
-    })
     var optOne = question.optionOne.votes.includes(currentUser)
     var optTwo = question.optionTwo.votes.includes(currentUser)
 
