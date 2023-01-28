@@ -67,6 +67,7 @@ function App2(props) {
                     (
                       <Route index path="*" element={
                         <React.Fragment>
+                          <AppNavBar/>
                           <Login {...props}/>
                         </React.Fragment>
                         } />
