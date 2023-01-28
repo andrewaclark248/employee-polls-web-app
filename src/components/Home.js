@@ -1,7 +1,8 @@
 import { connect } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { _getQuestions } from './../DATA.js'
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { sortQuestions, getUnansweredQuestions, getAnsweredQuestions } from './../utils/util.js'
 
 function Home(props) { 
     const navigate = useNavigate();
@@ -116,45 +117,9 @@ function Home(props) {
   }
 
 
-function sortQuestions(questions) {
-  questions.sort((a, b) => {
-    return (b.timestamp - a.timestamp)
-  })
-  return questions;
-}
 
 
-function getUnansweredQuestions(questions, currentUser) {
-  var questionKeys = Object.keys(questions)
-  var unansweredQuestions = questionKeys.map((questionKey) => {
-    var question = questions[questionKey]
-    if (!question.optionOne.votes.includes(currentUser) && !question.optionTwo.votes.includes(currentUser)) {
-      return question;
-    }
-  })
-  //remove undefineds
-  unansweredQuestions = unansweredQuestions.filter((question) => {
-    return question != undefined
-  })
-  return unansweredQuestions;
-}
 
-function getAnsweredQuestions(questions, currentUser) {
-  var questionKeys = Object.keys(questions)
-  var answeredQuestions = questionKeys.map((questionKey) => {
-    var question = questions[questionKey]
-    if (question.optionOne.votes.includes(currentUser) || question.optionTwo.votes.includes(currentUser)) {
-      return question;
-    } else {
-      return
-    }
-  })
-  //remove undefineds
-  answeredQuestions = answeredQuestions.filter((question) => {
-    return question != undefined
-  })
-  return answeredQuestions;
-}
   
 export default connect((state) => ({
   allUsers: state.users.allUsers,

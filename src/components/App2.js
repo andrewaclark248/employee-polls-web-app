@@ -6,14 +6,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { connect } from "react-redux";
 import AppNavBar from './Navbar.js';
 import NewPoll from './NewPoll.js';
-import NotificationBox from './NotificationBox.js';
 import React, { useState } from 'react';
-import ShowPoll from './ShowPoll.js';
-import AnwseredPoll from './AnwseredPoll.js';
 import LeaderBoard from './LeaderBoard';
 import Poll from './Poll.js'
 import ErrorPage from './ErrorPage';
-import { responsivePropType } from 'react-bootstrap/esm/createUtilityClasses';
 
 
 
@@ -34,9 +30,6 @@ function App2(props) {
                       <Route path="home" element={
                         <React.Fragment>
                           <AppNavBar/>
-                          {show &&
-                            <NotificationBox showNotificationBox={setShow} alertText={alertText}/>
-                          }
                           <Home setCurrentPoll={setCurrentPoll} setPollPage={setPollPage}/>
                         </React.Fragment>
                       } />
