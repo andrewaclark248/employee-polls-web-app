@@ -40,18 +40,6 @@ function Login(props) {
     );
   }
 
-  //
 export default connect((state) => ({
 }))(Login);
 
-
-
-  
-  //props.dispatch({
-  //  type: ADD_GOAL,
-  //  goal
-  //})
-
-//(state) => ({
- //   goals: state.goals,
- // })

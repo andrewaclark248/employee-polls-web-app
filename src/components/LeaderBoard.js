@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import { getUserStats, sortUsers } from './../utils/util.js'
+
 
 
 function LeaderBoard(props) {
@@ -58,47 +59,6 @@ function LeaderBoard(props) {
 
 }
 
-function getUserStats(allUsers, questions, currentUser) {
-    var users = [];
-    var userKeys = Object.keys(allUsers)
-    userKeys.forEach((key) => {
-        var user = allUsers[key]
-        var tempUser = {
-            user: null,
-            numOfQuestionsAsked: null,
-            numOfQuestionsAnswered: null,
-            avatarUrl: null
-        }
-        var questionAnswered = Object.keys(allUsers[user.id].answers).length
-        var questionsAsked = numberOfQuestionsAsked(questions, user.id)
-        tempUser.user = user.id;
-        tempUser.numOfQuestionsAnswered = questionAnswered;
-        tempUser.numOfQuestionsAsked = questionsAsked;
-        users.push(tempUser);
-    })
-    return users;
-}
-
-function numberOfQuestionsAsked(questions, currentUser) {
-    var questionKeys = Object.keys(questions);
-    var totalQuestionsAsked = 0
-    questionKeys.forEach((key) => {
-        var question = questions[key]
-        if (question.author == currentUser) {
-            totalQuestionsAsked = totalQuestionsAsked + 1;
-        }
-    })
-    return totalQuestionsAsked;
-}
-
-function sortUsers(users) {
-    var result = users.sort(function(a, b) {
-        var user1Total = a.numOfQuestionsAnswered + a.numOfQuestionsAsked;
-        var user2Total = b.numOfQuestionsAnswered + b.numOfQuestionsAsked;
-        return user2Total - user1Total;
-    });
-    return result;
-} 
 
 
 export default connect((state) => ({

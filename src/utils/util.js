@@ -1,31 +1,5 @@
 import { allUsers } from "../allUsers";
 
-export function unansweredPolls(allPolls, currentUser) {
-    var userAnansweredPolls = allPolls.filter(function(poll) {
-      if ((poll.user == currentUser) && (poll.answer == "none")){
-        return poll;
-      }
-    });
-    return userAnansweredPolls
-} 
-
-export function awnseredPolls(allPolls, currentUser) {
-    var answeredPolls = allPolls.filter(function(poll) {
-        if ((poll.answer != "none")){
-        return poll;
-        }
-    });
-
-    return answeredPolls;
-}
-
-export function getUserNamePretty(currentUser) {
-    var firstName = currentUser.split("-")[0]
-    var lastName = currentUser.split("-")[1]
-    var name = firstName + " " + lastName
-    return name;
-}
-
 export function getAvatar(currentUser) {
   var file = null
   if (currentUser == "jane-doe") {
@@ -40,69 +14,86 @@ export function getAvatar(currentUser) {
   return file;
 }
 
+
+
+export function sortQuestions(questions) {
+    questions.sort((a, b) => {
+      return (b.timestamp - a.timestamp)
+    })
+    return questions;
+  }
   
-
-export function sortStats(stats) {
-    stats.sort(function(a, b) {
-        var stat1 = a.numberOfQuestionsAsked + a.numberOfQuestionsAnswered;
-        var stat2 = b.numberOfQuestionsAsked + b.numberOfQuestionsAnswered;
-        return parseFloat(stat2) - parseFloat(stat1);
-    });
-    return stats;
-}
-
-export function getUserStats(userPolls, originalPolls) {
-    var stats = []
-
-    allUsers.map((user) => {
-        var currentUserStats = {
-            user: user,
-            numberOfQuestionsAsked: null,
-            numberOfQuestionsAnswered: null 
+export function getUnansweredQuestions(questions, currentUser) {
+    var questionKeys = Object.keys(questions)
+    var unansweredQuestions = questionKeys.map((questionKey) => {
+        var question = questions[questionKey]
+        if (!question.optionOne.votes.includes(currentUser) && !question.optionTwo.votes.includes(currentUser)) {
+        return question;
         }
-        var currentUserPolls = userPolls.filter((poll) => {
-            return poll.user == user;
-        })
-        var awnseredPollsList = awnseredPolls(currentUserPolls)
-        currentUserStats.numberOfQuestionsAnswered = awnseredPollsList.length;
-
-        var numberOfQuestionsAskedResult = numberOfQuestionsAsked(originalPolls, user)
-        currentUserStats.numberOfQuestionsAsked = numberOfQuestionsAskedResult;
-        
-        stats.push(currentUserStats)
     })
-    return stats;
+    //remove undefineds
+    unansweredQuestions = unansweredQuestions.filter((question) => {
+        return question != undefined
+    })
+    return unansweredQuestions;
 }
 
-
-
-export function numberOfQuestionsAsked(originalPolls, currentUser) {
-    var pollsAsked = null;
-    var polls = originalPolls.filter((poll) => {
-        return poll.currentUser == currentUser
+export function getAnsweredQuestions(questions, currentUser) {
+    var questionKeys = Object.keys(questions)
+    var answeredQuestions = questionKeys.map((questionKey) => {
+        var question = questions[questionKey]
+        if (question.optionOne.votes.includes(currentUser) || question.optionTwo.votes.includes(currentUser)) {
+        return question;
+        } else {
+        return
+        }
     })
-    pollsAsked = polls.length
-    return pollsAsked
-} 
-
-
-export function numberOfPeopleWhoVotedForPoll(userPolls, currentPoll) {
-    var polls = userPolls.filter((poll) => {
-        return poll.originalPollId == currentPoll.originalPollId;
+    //remove undefineds
+    answeredQuestions = answeredQuestions.filter((question) => {
+        return question != undefined
     })
+    return answeredQuestions;
+}
 
-    var pollWithSameAnswer = polls.filter((poll) => {
-        return poll.answer == currentPoll.answer;
+export function getUserStats(allUsers, questions, currentUser) {
+    var users = [];
+    var userKeys = Object.keys(allUsers)
+    userKeys.forEach((key) => {
+        var user = allUsers[key]
+        var tempUser = {
+            user: null,
+            numOfQuestionsAsked: null,
+            numOfQuestionsAnswered: null,
+            avatarUrl: null
+        }
+        var questionAnswered = Object.keys(allUsers[user.id].answers).length
+        var questionsAsked = numberOfQuestionsAsked(questions, user.id)
+        tempUser.user = user.id;
+        tempUser.numOfQuestionsAnswered = questionAnswered;
+        tempUser.numOfQuestionsAsked = questionsAsked;
+        users.push(tempUser);
     })
-    var result = (pollWithSameAnswer.length - 1)
-    if (result < 0) {
-        result = 0;
-    }
-    return result
-} 
+    return users;
+}
 
-export function percentageOfPeopleWhoVotedForPoll(totalVote) {
-    var result = (Math.floor((totalVote/3)*100))
+function numberOfQuestionsAsked(questions, currentUser) {
+    var questionKeys = Object.keys(questions);
+    var totalQuestionsAsked = 0
+    questionKeys.forEach((key) => {
+        var question = questions[key]
+        if (question.author == currentUser) {
+            totalQuestionsAsked = totalQuestionsAsked + 1;
+        }
+    })
+    return totalQuestionsAsked;
+}
+
+export function sortUsers(users) {
+    var result = users.sort(function(a, b) {
+        var user1Total = a.numOfQuestionsAnswered + a.numOfQuestionsAsked;
+        var user2Total = b.numOfQuestionsAnswered + b.numOfQuestionsAsked;
+        return user2Total - user1Total;
+    });
     return result;
-}
+} 
 
