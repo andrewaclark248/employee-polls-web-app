@@ -9,13 +9,6 @@ import { useNavigate } from 'react-router-dom'
 
 function Poll(props) {
     const navigate = useNavigate()
-
-    if (props.currentUser == "none" || props.currentUser == undefined) {
-        setTimeout(()=>{
-            navigate('/');
-          }, 100)
-        return;
-    }
   
     let { question_id } = useParams();
     let [pollChoice, setPollChoice] = useState(null);
@@ -31,6 +24,12 @@ function Poll(props) {
             //console.log("currentQuestion = ", currentQuestion.optionOne.votes)
         }
     })
+    if (currentQuestion == null) {
+        setTimeout(()=>{
+            navigate('/error');
+          }, 100)
+        return;
+    }
 
     let options = [
         { value: "optionOne", label: currentQuestion.optionOne.text },

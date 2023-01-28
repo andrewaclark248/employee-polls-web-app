@@ -3,7 +3,8 @@ import './../App.css'
 import { connect } from "react-redux";
 import { LOGIN_TYPE } from "../redux/actions/loginUserAction.js"
 import { Link } from "react-router-dom";
-
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const options = [
     { value: 'sarahedo', label: 'Sarah Edo' },
@@ -13,7 +14,10 @@ const options = [
   ]
 
 function Login(props) {
-    console.log("went to login page")
+  let [currentUser, setCurrentUser] = useState(null);
+
+
+
     return (
     <div>
         <center>
@@ -25,17 +29,18 @@ function Login(props) {
         <div className="row pb-5">
             <div className="col-4"></div>
             <div className="col-4">
-                <Select options={options} onChange={(e) => props.dispatch({type: LOGIN_TYPE, payload: e.value})} />
+                <Select options={options} onChange={(e) => { setCurrentUser(e.value); }}/>
             </div>
             <div className="col-4"></div>
         </div>
         <center>
-          <Link className="btn btn-primary" to="home">Login</Link>
+          <Link className="btn btn-primary" to="home" onClick={() => { props.dispatch({type: LOGIN_TYPE, payload: currentUser}); }}>Login</Link>
         </center>
       </div>
     );
   }
 
+  //
 export default connect((state) => ({
 }))(Login);
 
