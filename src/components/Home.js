@@ -124,15 +124,6 @@ function sortQuestions(questions) {
 }
 
 
-async function getQuestions() {
-  _getQuestions.then((data) => {
-    console.log("get questions", data)
-  })
-  .catch((error) => {
-    console.log("error", error)
-  })
-}
-
 function getUnansweredQuestions(questions, currentUser) {
   var questionKeys = Object.keys(questions)
   var unansweredQuestions = questionKeys.map((questionKey) => {

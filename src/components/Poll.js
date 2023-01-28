@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import Select from 'react-select'
 import { useState, useEffect } from 'react'
 import { _saveQuestionAnswer } from './../DATA.js'
 import { ANSWER_QUESTION } from './../redux/actions/questionAction.js'
@@ -55,14 +54,6 @@ function Poll(props) {
 
     }, [props.questions])
     
-
-
-
-
-    //var userWithSameAnswer = numberOfPeopleWhoVotedForPoll(getPoll);
-    //var precentVote = percentageOfPeopleWhoVotedForPoll(userWithSameAnswer);
-    var userAnswer = null;
-
 
     return (
         <div >
