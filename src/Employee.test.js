@@ -2,10 +2,9 @@ import {describe, expect, test} from '@jest/globals'
 
 import { _saveQuestion, _saveQuestionAnswer, _getUsers } from './DATA.js'
 
-import { questionAnsweredMethod } from './utils/util.js'
+import { questionAnsweredMethod, sortQuestions } from './utils/util.js'
 
-describe('something', () => {
-    /**
+describe('Test methods in Util.js and DATA.js', () => {
     test('_saveQuestion() success', async () => {
 
         var newQuestion = {
@@ -68,7 +67,7 @@ describe('something', () => {
     });
 
 
-    test('questionAnsweredMethod() success', () => {
+    test('questionAnsweredMethod() success - verify questions answered', () => {
         var formattedQuestion = {
             author: 'tylermcginnis',
             optionOne: { votes: ['tylermcginnis'], text: 'Candy' },
@@ -77,7 +76,7 @@ describe('something', () => {
         var result = questionAnsweredMethod(formattedQuestion, 'tylermcginnis');
 
         expect(result).toEqual(true)
-    });*/
+    });
 
 
     test('questionAnsweredMethod() failure - with invalid parameters', () => {
@@ -89,6 +88,56 @@ describe('something', () => {
         var result = questionAnsweredMethod(formattedQuestion);
         
         expect(result).toEqual(false)
+    }); 
+
+    test('questionAnsweredMethod() success - verify option Two', () => {
+        var formattedQuestion = {
+            author: 'tylermcginnis',
+            optionOne: { votes: [], text: 'Candy' },
+            optionTwo: { votes: ['tylermcginnis'], text: 'Meat' }
+          }
+        var result = questionAnsweredMethod(formattedQuestion, 'tylermcginnis');
+        
+        expect(result).toEqual(true)
+    }); 
+
+    test('questionAnsweredMethod() success - verify question not answered', () => {
+        var formattedQuestion = {
+            author: 'tylermcginnis',
+            optionOne: { votes: [], text: 'Candy' },
+            optionTwo: { votes: [], text: 'Meat' }
+          }
+        var result = questionAnsweredMethod(formattedQuestion, 'tylermcginnis');
+        
+        expect(result).toEqual(false)
+    }); 
+
+    test('sortQuestions() success', () => {
+        var questions = [
+            { timestamp: 9 },
+            { timestamp: 7 },
+            { timestamp: 2 },
+            { timestamp: 3 }
+        ]
+        var expectedResult = [
+            { timestamp: 9 },
+            { timestamp: 7 },
+            { timestamp: 3 },
+            { timestamp: 2 }
+          ]
+        var result = sortQuestions(questions);
+
+        expect(result).toEqual(expectedResult)
+    });
+
+    test('sortQuestions() failure - with invalid params', () => {
+        try {
+            var result = sortQuestions(null);
+        } catch (e) {
+            var error = e.toString();
+        }
+        console.log("error", error.toString())
+        expect(error).toEqual("TypeError: Cannot read properties of null (reading 'sort')")
     });
 
 });
