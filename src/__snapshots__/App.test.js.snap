@@ -1,0 +1,871 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test App.js add snapshot 1`] = `
+<div
+  className="app"
+>
+  <div
+    style={
+      Object {
+        "paddingBottom": 30,
+      }
+    }
+  >
+    <nav
+      className="navbar navbar-expand-lg navbar-light bg-light"
+    >
+      <span
+        className="text-primary fw-bold  navbar-brand"
+        disabled={true}
+        style={
+          Object {
+            "paddingLeft": "20px",
+            "paddingRight": "20px",
+          }
+        }
+      >
+        Employee Poll App
+      </span>
+      <button
+        aria-controls="basic-navbar-nav"
+        aria-label="Toggle navigation"
+        className="navbar-toggler collapsed"
+        onClick={[Function]}
+        type="button"
+      >
+        <span
+          className="navbar-toggler-icon"
+        />
+      </button>
+      <div
+        aria-expanded={null}
+        className="navbar-collapse collapse"
+        id="basic-navbar-nav"
+      >
+        <div
+          className="me-auto navbar-nav"
+          onKeyDown={[Function]}
+        >
+          <a
+            className="active fw-bold"
+            href="/home"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "black",
+                "paddingRight": 10,
+                "textDecoration": "none",
+              }
+            }
+          >
+            Home
+          </a>
+          <a
+            className="active fw-bold"
+            href="/add"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "black",
+                "paddingRight": 10,
+                "textDecoration": "none",
+              }
+            }
+          >
+            New Poll
+          </a>
+          <a
+            className="active fw-bold"
+            href="/leaderboard"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "black",
+                "paddingRight": 10,
+                "textDecoration": "none",
+              }
+            }
+          >
+            LeaderBoard
+          </a>
+        </div>
+      </div>
+      <a
+        className="active fw-bold "
+        href="/"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "black",
+            "paddingRight": 10,
+            "textDecoration": "none",
+          }
+        }
+      >
+        Log Out
+      </a>
+    </nav>
+  </div>
+  <div>
+    <center>
+      <div
+        className="bottom-padding"
+      >
+        <h1>
+          Home Page
+        </h1>
+        <span>
+          Current User: 
+           
+        </span>
+      </div>
+    </center>
+    <div
+      className="row pb-5"
+    >
+      <div
+        className="col-4"
+      />
+      <div
+        className="col-4"
+      >
+        <div
+          className="d-grid gap-2"
+        >
+          <button
+            className="btn btn-primary"
+            onClick={[Function]}
+            type="button"
+          >
+            Show Answered Polls
+          </button>
+        </div>
+      </div>
+      <div
+        className="col-4"
+      />
+    </div>
+    <div
+      className="row"
+    >
+      <div
+        className="col-2"
+      />
+      <div
+        className="col-4"
+      >
+        <div
+          className="card"
+        >
+          <div
+            className="card-header text-white bg-primary"
+          >
+            Unawnsered Polls
+          </div>
+          <div
+            className="card-body"
+          >
+            <div
+              className=""
+            >
+              <div
+                className="row pb-3"
+              >
+                <div
+                  className="col-2"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    1
+                    .
+                  </span>
+                </div>
+                <div
+                  className="col-4"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    xj352vofupe1dqz9emx13r
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    Sun Apr 30 2017
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <button
+                    className="btn btn-primary"
+                    onClick={[Function]}
+                  >
+                     Show Poll
+                  </button>
+                </div>
+              </div>
+              <div
+                className="row pb-3"
+              >
+                <div
+                  className="col-2"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    2
+                    .
+                  </span>
+                </div>
+                <div
+                  className="col-4"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    vthrdm985a262al8qx3do
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    Wed Mar 15 2017
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <button
+                    className="btn btn-primary"
+                    onClick={[Function]}
+                  >
+                     Show Poll
+                  </button>
+                </div>
+              </div>
+              <div
+                className="row pb-3"
+              >
+                <div
+                  className="col-2"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    3
+                    .
+                  </span>
+                </div>
+                <div
+                  className="col-4"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    am8ehyc8byjqgar0jgpub9
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    Fri Mar 03 2017
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <button
+                    className="btn btn-primary"
+                    onClick={[Function]}
+                  >
+                     Show Poll
+                  </button>
+                </div>
+              </div>
+              <div
+                className="row pb-3"
+              >
+                <div
+                  className="col-2"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    4
+                    .
+                  </span>
+                </div>
+                <div
+                  className="col-4"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    loxhs1bqm25b708cmbf3g
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    Sat Dec 24 2016
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <button
+                    className="btn btn-primary"
+                    onClick={[Function]}
+                  >
+                     Show Poll
+                  </button>
+                </div>
+              </div>
+              <div
+                className="row pb-3"
+              >
+                <div
+                  className="col-2"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    5
+                    .
+                  </span>
+                </div>
+                <div
+                  className="col-4"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    6ni6ok3ym7mf1p33lnez
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    Thu Jul 14 2016
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <button
+                    className="btn btn-primary"
+                    onClick={[Function]}
+                  >
+                     Show Poll
+                  </button>
+                </div>
+              </div>
+              <div
+                className="row pb-3"
+              >
+                <div
+                  className="col-2"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    6
+                    .
+                  </span>
+                </div>
+                <div
+                  className="col-4"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    8xf0y6ziyjabvozdd253nd
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    Tue Jun 28 2016
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <button
+                    className="btn btn-primary"
+                    onClick={[Function]}
+                  >
+                     Show Poll
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="col-4"
+      />
+      <div
+        className="col-2"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Test App.js renders correctly 1`] = `
+<div
+  className="app"
+>
+  <div
+    style={
+      Object {
+        "paddingBottom": 30,
+      }
+    }
+  >
+    <nav
+      className="navbar navbar-expand-lg navbar-light bg-light"
+    >
+      <span
+        className="text-primary fw-bold  navbar-brand"
+        disabled={true}
+        style={
+          Object {
+            "paddingLeft": "20px",
+            "paddingRight": "20px",
+          }
+        }
+      >
+        Employee Poll App
+      </span>
+      <button
+        aria-controls="basic-navbar-nav"
+        aria-label="Toggle navigation"
+        className="navbar-toggler collapsed"
+        onClick={[Function]}
+        type="button"
+      >
+        <span
+          className="navbar-toggler-icon"
+        />
+      </button>
+      <div
+        aria-expanded={null}
+        className="navbar-collapse collapse"
+        id="basic-navbar-nav"
+      >
+        <div
+          className="me-auto navbar-nav"
+          onKeyDown={[Function]}
+        >
+          <a
+            className="active fw-bold"
+            href="/home"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "black",
+                "paddingRight": 10,
+                "textDecoration": "none",
+              }
+            }
+          >
+            Home
+          </a>
+          <a
+            className="active fw-bold"
+            href="/add"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "black",
+                "paddingRight": 10,
+                "textDecoration": "none",
+              }
+            }
+          >
+            New Poll
+          </a>
+          <a
+            className="active fw-bold"
+            href="/leaderboard"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "black",
+                "paddingRight": 10,
+                "textDecoration": "none",
+              }
+            }
+          >
+            LeaderBoard
+          </a>
+        </div>
+      </div>
+      <a
+        className="active fw-bold "
+        href="/"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "black",
+            "paddingRight": 10,
+            "textDecoration": "none",
+          }
+        }
+      >
+        Log Out
+      </a>
+    </nav>
+  </div>
+  <div>
+    <center>
+      <div
+        className="bottom-padding"
+      >
+        <h1>
+          Home Page
+        </h1>
+        <span>
+          Current User: 
+           
+        </span>
+      </div>
+    </center>
+    <div
+      className="row pb-5"
+    >
+      <div
+        className="col-4"
+      />
+      <div
+        className="col-4"
+      >
+        <div
+          className="d-grid gap-2"
+        >
+          <button
+            className="btn btn-primary"
+            onClick={[Function]}
+            type="button"
+          >
+            Show Answered Polls
+          </button>
+        </div>
+      </div>
+      <div
+        className="col-4"
+      />
+    </div>
+    <div
+      className="row"
+    >
+      <div
+        className="col-2"
+      />
+      <div
+        className="col-4"
+      >
+        <div
+          className="card"
+        >
+          <div
+            className="card-header text-white bg-primary"
+          >
+            Unawnsered Polls
+          </div>
+          <div
+            className="card-body"
+          >
+            <div
+              className=""
+            >
+              <div
+                className="row pb-3"
+              >
+                <div
+                  className="col-2"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    1
+                    .
+                  </span>
+                </div>
+                <div
+                  className="col-4"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    xj352vofupe1dqz9emx13r
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    Sun Apr 30 2017
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <button
+                    className="btn btn-primary"
+                    onClick={[Function]}
+                  >
+                     Show Poll
+                  </button>
+                </div>
+              </div>
+              <div
+                className="row pb-3"
+              >
+                <div
+                  className="col-2"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    2
+                    .
+                  </span>
+                </div>
+                <div
+                  className="col-4"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    vthrdm985a262al8qx3do
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    Wed Mar 15 2017
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <button
+                    className="btn btn-primary"
+                    onClick={[Function]}
+                  >
+                     Show Poll
+                  </button>
+                </div>
+              </div>
+              <div
+                className="row pb-3"
+              >
+                <div
+                  className="col-2"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    3
+                    .
+                  </span>
+                </div>
+                <div
+                  className="col-4"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    am8ehyc8byjqgar0jgpub9
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    Fri Mar 03 2017
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <button
+                    className="btn btn-primary"
+                    onClick={[Function]}
+                  >
+                     Show Poll
+                  </button>
+                </div>
+              </div>
+              <div
+                className="row pb-3"
+              >
+                <div
+                  className="col-2"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    4
+                    .
+                  </span>
+                </div>
+                <div
+                  className="col-4"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    loxhs1bqm25b708cmbf3g
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    Sat Dec 24 2016
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <button
+                    className="btn btn-primary"
+                    onClick={[Function]}
+                  >
+                     Show Poll
+                  </button>
+                </div>
+              </div>
+              <div
+                className="row pb-3"
+              >
+                <div
+                  className="col-2"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    5
+                    .
+                  </span>
+                </div>
+                <div
+                  className="col-4"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    6ni6ok3ym7mf1p33lnez
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    Thu Jul 14 2016
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <button
+                    className="btn btn-primary"
+                    onClick={[Function]}
+                  >
+                     Show Poll
+                  </button>
+                </div>
+              </div>
+              <div
+                className="row pb-3"
+              >
+                <div
+                  className="col-2"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    6
+                    .
+                  </span>
+                </div>
+                <div
+                  className="col-4"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    8xf0y6ziyjabvozdd253nd
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <span
+                    className="text-dark"
+                  >
+                    Tue Jun 28 2016
+                  </span>
+                </div>
+                <div
+                  className="col-3"
+                >
+                  <button
+                    className="btn btn-primary"
+                    onClick={[Function]}
+                  >
+                     Show Poll
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="col-4"
+      />
+      <div
+        className="col-2"
+      />
+    </div>
+  </div>
+</div>
+`;
