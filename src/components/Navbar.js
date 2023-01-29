@@ -5,7 +5,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 //import NavDropdown from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { LOGIN_TYPE } from "../redux/actions/loginUserAction.js"
-
+import { getUserName } from './../utils/util.js'
 
 function AppNavBar(props) {
 
@@ -23,6 +23,7 @@ function AppNavBar(props) {
               <Link className="active fw-bold" to="/leaderboard" style={{textDecoration: "none", color: "black", paddingRight: 10 }}>LeaderBoard</Link>
             </Nav>
           </Navbar.Collapse>
+          <span className="pe-3">{getUserName(props.currentUser)}</span>
           <Link className="active fw-bold " to="/" style={{textDecoration: "none", color: "black", paddingRight: 10 }} onClick={() => { props.dispatch({type: LOGIN_TYPE, payload: 'none'}) }}>Log Out</Link>
 
         </Navbar>
