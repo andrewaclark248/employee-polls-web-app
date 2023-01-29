@@ -54,7 +54,8 @@ function Poll(props) {
 
     }, [props.questions])
     
-
+    var getCurrentUser = props.allUsers[props.currentUser]
+    console.log("currne path ", getCurrentUser.avatarURL)
     return (
         <div >
             <h1 className="">Show Poll</h1>
@@ -62,6 +63,7 @@ function Poll(props) {
             <div className="col-4"></div>
             <div className="col-4">
                 <span>Current User: <span className='fw-bold'>{props.currentUser}</span></span>
+                <img src={getCurrentUser.avatarURL} height={100} width={100} />
             </div>
             <div className="col-4"></div>
             </div>
@@ -197,6 +199,7 @@ async function anwserPoll(props, authedUser, qid, answer, navigate) {
 
 
 export default connect((state) => ({
+    allUsers: state.users.allUsers,
     currentUser: state.loginUser.currentUser,
     questions: state.questions.questions
   }))(Poll);

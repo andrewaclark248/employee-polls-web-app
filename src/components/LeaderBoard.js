@@ -7,6 +7,7 @@ function LeaderBoard(props) {
     var result = getUserStats(props.allUsers, props.questions, props.currentUser)
     var users = sortUsers(result);
 
+    console.log(users)
     return (
         <div>
             <div className="row">
@@ -37,7 +38,7 @@ function LeaderBoard(props) {
                                                     <tr key={index}>
                                                         <td>{stat.user}</td>
                                                         <td>
-                                                            <span>pic</span>
+                                                            <img src={stat.avatarUrl} height={50} width={50} />
                                                         </td>
                                                         <td>{stat.numOfQuestionsAsked}</td>
                                                         <td>{stat.numOfQuestionsAnswered}</td>

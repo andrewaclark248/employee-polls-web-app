@@ -1,20 +1,4 @@
 
-export function getAvatar(currentUser) {
-  var file = null
-  if (currentUser == "jane-doe") {
-      file = require("./../assets/avatar-3-female.jpg")
-  } else if(currentUser == "john-doe") {
-      file = require("./../assets/avatar-2-male.jpg")
-  } else if (currentUser == "batman-robin") {
-      file = require("./../assets/avatar-1-male.jpg")
-  } else {
-      file = require("./../assets/none.jpg")
-  }
-  return file;
-}
-
-
-
 export function sortQuestions(questions) {
     questions.sort((a, b) => {
       return (b.timestamp - a.timestamp)
@@ -70,6 +54,7 @@ export function getUserStats(allUsers, questions, currentUser) {
         tempUser.user = user.id;
         tempUser.numOfQuestionsAnswered = questionAnswered;
         tempUser.numOfQuestionsAsked = questionsAsked;
+        tempUser.avatarUrl = user.avatarURL
         users.push(tempUser);
     })
     return users;
