@@ -6,6 +6,7 @@ import { ANSWER_QUESTION } from './../redux/actions/questionAction.js'
 import { UPDATE_USER_ANSWER } from './../redux/actions/changeUser.js'
 import { useNavigate } from 'react-router-dom'
 import {questionAnsweredMethod} from "./../utils/util.js"
+import { getUserName } from './../utils/util.js'
 
 function Poll(props) {
     const navigate = useNavigate()
@@ -13,8 +14,10 @@ function Poll(props) {
     let { question_id } = useParams();
     let [pollChoice, setPollChoice] = useState(null);
     let [questionAnswered, setQuestionAnswered] = useState(false);
-    let [numberOfVotesForOption, setNumberOfVotesForOption] = useState(0);
-    let [percentageVoteForAnswer, setPercentageVoteForAnswer] = useState(0);
+    let [numberOfVotesForOptionOne, setNumberOfVotesForOptionOne] = useState(0);
+    let [percentageVoteForAnswerOne, setPercentageVoteForOptionOne] = useState(0);
+    let [numberOfVotesForOptionTwo, setNumberOfVotesForOptionTwo] = useState(0);
+    let [percentageVoteForAnswerTwo, setPercentageVoteForOptionTwo] = useState(0);
 
     var currentQuestion = null;
     Object.keys(props.questions).forEach((key) => {
@@ -45,28 +48,45 @@ function Poll(props) {
             setQuestionAnswered(true)
             //userAnswer = getUserAnswer(currentQuestion, questionAnswered, props.currentUser) 
             if (pollChoice == "optionOne") {
-                setNumberOfVotesForOption(currentQuestion.optionOne.votes.length.toString());
+                //setNumberOfVotesForOption(currentQuestion.optionOne.votes.length.toString());
             } else {
-                setNumberOfVotesForOption(currentQuestion.optionTwo.votes.length.toString());
+                //setNumberOfVotesForOption(currentQuestion.optionTwo.votes.length.toString());
             }
-            var result = percentageVotedForAnswer(currentQuestion, pollChoice)
-            setPercentageVoteForAnswer(result)
+            setNumberOfVotesForOptionOne(currentQuestion.optionOne.votes.length.toString())
+            setNumberOfVotesForOptionTwo(currentQuestion.optionTwo.votes.length.toString())
+
+            var resultOptionOne = percentageVotedForAnswer(currentQuestion, "optionOne")
+            setPercentageVoteForOptionOne(resultOptionOne)
+
+            var resultOptionTwo = percentageVotedForAnswer(currentQuestion, "optionTwo")
+            setPercentageVoteForOptionTwo(resultOptionTwo)
+
         } 
 
     }, [props.questions])
     
-    var getCurrentUser = props.allUsers[props.currentUser]
-    console.log("currne path ", getCurrentUser.avatarURL)
+    var getAuthor = props.allUsers[currentQuestion.author]
+
+    var pollChoice2 = votedForWhichOption(currentQuestion, props.currentUser);
+
     return (
         <div >
             <h1 className="">Show Poll</h1>
             <div className="row bottom-padding">
-            <div className="col-4"></div>
-            <div className="col-4">
-                <span>Current User: <span className='fw-bold'>{props.currentUser}</span></span>
-                <img src={getCurrentUser.avatarURL} height={100} width={100} />
+                <div className="col-4"></div>
+                <div className="col-4">
+                    <span>Author: <span className='fw-bold'>{getUserName(props.currentUser)}</span></span>
+                    <br></br>
+                    <img src={getAuthor.avatarURL} height={100} width={100} />
+                </div>
+                <div className="col-4"></div>
             </div>
-            <div className="col-4"></div>
+            <div className="row">
+                <div className="pb-3">
+                    <center>
+                        <h5>Would You Rather?</h5>
+                    </center>
+                </div>
             </div>
             <div className="row pb-5">
                 <div className="col-2"></div>
@@ -76,13 +96,14 @@ function Poll(props) {
                             Answer Poll
                         </div>
                         <div className="card-body">
+
                             <div className="pb-3">
                                 <label className="">Poll ID</label>
                                 <input className="form-control"  disabled={true} value={currentQuestion.id}/>
                             </div>
                             <div className="pb-3">
                                 <div className="row">
-                                    <label className="">First Choice</label>
+                                    <label className="">First Choice <span className="text-danger px-5 fw-bold">{pollChoice2 == "optionOne" ? "You Voted For Option One": null}</span></label>
                                 </div>
                                 <div className="row">
                                     <div className="col-8">
@@ -97,7 +118,7 @@ function Poll(props) {
                             </div>
                             <div className="pb-3">
                                 <div className="row">
-                                    <label className="">Second Choice</label>
+                                    <label className="">Second Choice <span className="text-danger px-5 fw-bold">{pollChoice2 == "optionTwo" ? "You Voted For Option Two": null}</span></label>
                                 </div>
                                 <div className="row">
                                     <div className="col-8">
@@ -127,28 +148,59 @@ function Poll(props) {
                                 Poll Stats
                             </div>
                             <div className="card-body">
-                                <div className="row pb-3">
-                                    <div className="col-8">
-                                        <span>
-                                            No. of people who voted for <span className="fw-bold"><u>{pollChoice}</u></span> answer: 
-                                        </span>
+                                <div className="row">
+                                    <h5>Option One</h5>
+                                    <div className="row pb-3">
+                                        <div className="col-8">
+                                            <span>
+                                                No. of people who voted for <span className="fw-bold"><u>Option One</u></span> answer: 
+                                            </span>
+                                        </div>
+                                        <div className="col-4">
+                                            <span className="fw-bold">
+                                                {numberOfVotesForOptionOne}
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div className="col-4">
-                                        <span className="fw-bold">
-                                            {numberOfVotesForOption}
-                                        </span>
+                                    <div className="row">
+                                        <div className="col-8">
+                                            <span>
+                                                Percent of people who voted for <span className="fw-bold"><u>Option One</u></span> answer: 
+                                            </span>
+                                        </div>
+                                        <div className="col-4">
+                                            <span className="fw-bold">
+                                                {percentageVoteForAnswerOne}%
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
+                                <hr></hr>
                                 <div className="row">
-                                    <div className="col-8">
-                                        <span>
-                                            Percent of people who voted for <span className="fw-bold"><u>{pollChoice}</u></span> answer: 
-                                        </span>
+                                    <h5>Option Two</h5>
+                                    <div className="row pb-3">
+                                        <div className="col-8">
+                                            <span>
+                                                No. of people who voted for <span className="fw-bold"><u>Option Two</u></span> answer: 
+                                            </span>
+                                        </div>
+                                        <div className="col-4">
+                                            <span className="fw-bold">
+                                                {numberOfVotesForOptionTwo}
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div className="col-4">
-                                        <span className="fw-bold">
-                                            {percentageVoteForAnswer}%
-                                        </span>
+                                    <div className="row">
+                                        <div className="col-8">
+                                            <span>
+                                                Percent of people who voted for <span className="fw-bold"><u>Option Two</u></span> answer: 
+                                            </span>
+                                        </div>
+                                        <div className="col-4">
+                                            <span className="fw-bold">
+                                                {percentageVoteForAnswerTwo}%
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -186,6 +238,16 @@ async function anwserPoll(props, authedUser, qid, answer, navigate) {
         }
     }
 }  
+
+function votedForWhichOption(question, currentUser) {
+    if (question.optionOne.votes.includes(currentUser)) {
+        return "optionOne"
+    } else if (question.optionTwo.votes.includes(currentUser)) {
+        return "optionTwo"
+    } else {
+        return "none"
+    }
+}
 
 
 

@@ -31,7 +31,6 @@ describe('Test App.js', () => {
   });
 
 
-
   it('add snapshot', () => {
     const tree = renderer.create(
       <Provider store={store}>
