@@ -34,7 +34,7 @@ function NewPoll(props) {
                             <input className="form-control" placeholder="Second Option" onChange={(e) => { setSecondOption(e.target.value) }} />
                         </div>
                         <div className="pb-2">
-                            <button className="btn btn-primary" onClick={() => { onClickHandler(props, firstOption, secondOption); navigate('/home'); }}>Create Poll</button>
+                            <button className="btn btn-primary" onClick={() => { onClickHandler(props, firstOption, secondOption, navigate); }}>Create Poll</button>
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@ function NewPoll(props) {
   }
 
 
-async function onClickHandler(props, firstOption, secondOption) {
+async function onClickHandler(props, firstOption, secondOption, navigate) {
     
     var question = {
         optionOneText: firstOption,
@@ -57,6 +57,9 @@ async function onClickHandler(props, firstOption, secondOption) {
 
     var result = await _saveQuestion(question)
     props.dispatch({type: CREATE_QUESTION, payload: {question: result} });
+
+    navigate('/home');
+
 }
 
 

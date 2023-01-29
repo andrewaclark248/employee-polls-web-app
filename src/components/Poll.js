@@ -46,12 +46,7 @@ function Poll(props) {
 
         if (result == true) {
             setQuestionAnswered(true)
-            //userAnswer = getUserAnswer(currentQuestion, questionAnswered, props.currentUser) 
-            if (pollChoice == "optionOne") {
-                //setNumberOfVotesForOption(currentQuestion.optionOne.votes.length.toString());
-            } else {
-                //setNumberOfVotesForOption(currentQuestion.optionTwo.votes.length.toString());
-            }
+
             setNumberOfVotesForOptionOne(currentQuestion.optionOne.votes.length.toString())
             setNumberOfVotesForOptionTwo(currentQuestion.optionTwo.votes.length.toString())
 
