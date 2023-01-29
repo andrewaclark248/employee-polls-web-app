@@ -6,6 +6,7 @@ import { ANSWER_QUESTION } from './../redux/actions/questionAction.js'
 import { UPDATE_USER_ANSWER } from './../redux/actions/changeUser.js'
 import { useNavigate } from 'react-router-dom'
 import {questionAnsweredMethod} from "./../utils/util.js"
+import { getUserName } from './../utils/util.js'
 
 function Poll(props) {
     const navigate = useNavigate()
@@ -56,18 +57,28 @@ function Poll(props) {
     }, [props.questions])
     
     var getAuthor = props.allUsers[currentQuestion.author]
-    console.log("currentQuestion", getAuthor)
 
+    var pollChoice2 = votedForWhichOption(currentQuestion, props.currentUser);
+
+    console.log("currentQuestion", currentQuestion)
     return (
         <div >
             <h1 className="">Show Poll</h1>
             <div className="row bottom-padding">
-            <div className="col-4"></div>
-            <div className="col-4">
-                <span>Current User: <span className='fw-bold'>{props.currentUser}</span></span>
-                <img src={getAuthor.avatarURL} height={100} width={100} />
+                <div className="col-4"></div>
+                <div className="col-4">
+                    <span>Author: <span className='fw-bold'>{getUserName(props.currentUser)}</span></span>
+                    <br></br>
+                    <img src={getAuthor.avatarURL} height={100} width={100} />
+                </div>
+                <div className="col-4"></div>
             </div>
-            <div className="col-4"></div>
+            <div className="row">
+                <div className="pb-3">
+                    <center>
+                        <h5>Would You Rather?</h5>
+                    </center>
+                </div>
             </div>
             <div className="row pb-5">
                 <div className="col-2"></div>
@@ -77,16 +88,14 @@ function Poll(props) {
                             Answer Poll
                         </div>
                         <div className="card-body">
-                            <div className="pb-3">
-                                <h5>Would You Rather?</h5>
-                            </div>
+
                             <div className="pb-3">
                                 <label className="">Poll ID</label>
                                 <input className="form-control"  disabled={true} value={currentQuestion.id}/>
                             </div>
                             <div className="pb-3">
                                 <div className="row">
-                                    <label className="">First Choice</label>
+                                    <label className="">First Choice <span className="text-danger px-5 fw-bold">{pollChoice2 == "optionOne" ? "You Voted For Option One": null}</span></label>
                                 </div>
                                 <div className="row">
                                     <div className="col-8">
@@ -101,7 +110,7 @@ function Poll(props) {
                             </div>
                             <div className="pb-3">
                                 <div className="row">
-                                    <label className="">Second Choice</label>
+                                    <label className="">Second Choice <span className="text-danger px-5 fw-bold">{pollChoice2 == "optionTwo" ? "You Voted For Option Two": null}</span></label>
                                 </div>
                                 <div className="row">
                                     <div className="col-8">
@@ -190,6 +199,16 @@ async function anwserPoll(props, authedUser, qid, answer, navigate) {
         }
     }
 }  
+
+function votedForWhichOption(question, currentUser) {
+    if (question.optionOne.votes.includes(currentUser)) {
+        return "optionOne"
+    } else if (question.optionTwo.votes.includes(currentUser)) {
+        return "optionTwo"
+    } else {
+        return "none"
+    }
+}
 
 
 
