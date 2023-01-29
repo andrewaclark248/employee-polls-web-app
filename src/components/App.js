@@ -27,12 +27,7 @@ function App(props) {
               
                 {props.currentUser != "none" ?
                     (<React.Fragment>
-                      <Route path="home" element={
-                        <React.Fragment>
-                          <AppNavBar/>
-                          <Home setCurrentPoll={setCurrentPoll} setPollPage={setPollPage}/>
-                        </React.Fragment>
-                      } />
+
 
                       <Route path="add" element={
                         <React.Fragment>
@@ -40,6 +35,16 @@ function App(props) {
                           <NewPoll howNotificationBox={setShow} setAlertText={setAlertText}/>
                         </React.Fragment>
                       } />
+
+
+                      <Route path="home" element={
+                        <React.Fragment>
+                          <AppNavBar/>
+                          <Home setCurrentPoll={setCurrentPoll} setPollPage={setPollPage}/>
+                        </React.Fragment>
+                      } />
+
+
 
 
                       <Route path="leaderboard" element={
