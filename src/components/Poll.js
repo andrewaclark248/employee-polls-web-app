@@ -55,8 +55,9 @@ function Poll(props) {
 
     }, [props.questions])
     
-    var getCurrentUser = props.allUsers[props.currentUser]
-    console.log("currne path ", getCurrentUser.avatarURL)
+    var getAuthor = props.allUsers[currentQuestion.author]
+    console.log("currentQuestion", getAuthor)
+
     return (
         <div >
             <h1 className="">Show Poll</h1>
@@ -64,7 +65,7 @@ function Poll(props) {
             <div className="col-4"></div>
             <div className="col-4">
                 <span>Current User: <span className='fw-bold'>{props.currentUser}</span></span>
-                <img src={getCurrentUser.avatarURL} height={100} width={100} />
+                <img src={getAuthor.avatarURL} height={100} width={100} />
             </div>
             <div className="col-4"></div>
             </div>
@@ -76,6 +77,9 @@ function Poll(props) {
                             Answer Poll
                         </div>
                         <div className="card-body">
+                            <div className="pb-3">
+                                <h5>Would You Rather?</h5>
+                            </div>
                             <div className="pb-3">
                                 <label className="">Poll ID</label>
                                 <input className="form-control"  disabled={true} value={currentQuestion.id}/>

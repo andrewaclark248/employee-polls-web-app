@@ -48,6 +48,9 @@ function ShowPoll(props) {
                         </div>
                         <div className="card-body">
                             <div className="pb-3">
+                                <span>Would You Rather?</span>
+                            </div>
+                            <div className="pb-3">
                                 <label className="">Poll ID</label>
                                 <input className="form-control"  disabled={true} value={question.id}/>
                             </div>
