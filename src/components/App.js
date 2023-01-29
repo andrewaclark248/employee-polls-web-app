@@ -13,7 +13,7 @@ import ErrorPage from './ErrorPage';
 
 
 
-function App2(props) {
+function App(props) {
     let [show, setShow] = useState(false);
     let [currentPoll, setCurrentPoll] = useState("");
     let [alertText, setAlertText] = useState("");
@@ -81,7 +81,7 @@ function App2(props) {
 export default connect((state) => ({
 	currentUser: state.loginUser.currentUser,
 
-}))(App2);
+}))(App);
 
 
 

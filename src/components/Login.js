@@ -34,7 +34,7 @@ function Login(props) {
             <div className="col-4"></div>
         </div>
         <center>
-          <Link className="btn btn-primary" to="home" onClick={() => { props.dispatch({type: LOGIN_TYPE, payload: currentUser}); }}>Login</Link>
+          <Link className="btn btn-primary" to="home" onClick={() => { props.dispatch({type: LOGIN_TYPE, payload: currentUser}); }}>Login Now</Link>
         </center>
       </div>
     );
