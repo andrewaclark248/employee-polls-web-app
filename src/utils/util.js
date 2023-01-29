@@ -1,4 +1,3 @@
-import { allUsers } from "../allUsers";
 
 export function getAvatar(currentUser) {
   var file = null
