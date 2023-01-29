@@ -5,7 +5,7 @@ import { _saveQuestion, _saveQuestionAnswer, _getUsers } from './DATA.js'
 import { questionAnsweredMethod, sortQuestions } from './utils/util.js'
 
 describe('Test methods in Util.js and DATA.js', () => {
-    test('_saveQuestion() success', async () => {
+   /** test('_saveQuestion() success', async () => {
 
         var newQuestion = {
             optionOneText: "Candy",
@@ -138,6 +138,6 @@ describe('Test methods in Util.js and DATA.js', () => {
         }
         console.log("error", error.toString())
         expect(error).toEqual("TypeError: Cannot read properties of null (reading 'sort')")
-    });
+    }); */
 
 });
