@@ -20,6 +20,11 @@ function Home(props) {
     return (
       <div>
           <div className="row pb-5">
+            <center>
+              <h4>Home Page</h4>
+            </center>
+          </div>
+          <div className="row pb-5">
             <div className="col-4"></div>
             <div className="col-4">
               <div className="d-grid gap-2">
