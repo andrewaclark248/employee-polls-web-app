@@ -93,3 +93,14 @@ export function questionAnsweredMethod(question, currentUser) {
         return false;
     }
 }
+
+export function getUserName(currentUser) {
+
+    var users = {
+        sarahedo: 'Sarah Edo',
+        tylermcginnis: 'Tyler McGinnis',
+        mtsamis: 'Mike Tsamis', 
+        zoshikanlu: 'Zenobia Oshikanlu'
+    }
+    return users[currentUser]
+}
