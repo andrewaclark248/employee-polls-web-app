@@ -81,3 +81,15 @@ export function sortUsers(users) {
     return result;
 } 
 
+
+export function questionAnsweredMethod(question, currentUser) {
+    var isTrue = false;
+    var optOne = question.optionOne.votes.includes(currentUser)
+    var optTwo = question.optionTwo.votes.includes(currentUser)
+
+    if (optOne || optTwo) {
+        return true;
+    } else {
+        return false;
+    }
+}

@@ -5,6 +5,7 @@ import { _saveQuestionAnswer } from './../DATA.js'
 import { ANSWER_QUESTION } from './../redux/actions/questionAction.js'
 import { UPDATE_USER_ANSWER } from './../redux/actions/changeUser.js'
 import { useNavigate } from 'react-router-dom'
+import {questionAnsweredMethod} from "./../utils/util.js"
 
 function Poll(props) {
     const navigate = useNavigate()
@@ -173,17 +174,7 @@ function percentageVotedForAnswer(currentQuestion, pollChoice) {
     return percentage;
 }
 
-function questionAnsweredMethod(question, currentUser) {
-    var isTrue = false;
-    var optOne = question.optionOne.votes.includes(currentUser)
-    var optTwo = question.optionTwo.votes.includes(currentUser)
 
-    if (optOne || optTwo) {
-        return true;
-    } else {
-        return false;
-    }
-}
 
 //validation
 async function anwserPoll(props, authedUser, qid, answer, navigate) {
