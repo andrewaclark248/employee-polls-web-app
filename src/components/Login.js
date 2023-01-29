@@ -13,9 +13,17 @@ const options = [
     { value: 'zoshikanlu', label: 'Zenobia Oshikanlu', }
   ]
 
+
+
 function Login(props) {
   let [currentUser, setCurrentUser] = useState(null);
+  const navigate = useNavigate();
 
+  let newUrl = window.location.href.replace("http://localhost:3000","")
+  let path = "/home"
+  if (newUrl != "/") {
+    path = newUrl;
+  }
 
 
     return (
@@ -34,12 +42,22 @@ function Login(props) {
             <div className="col-4"></div>
         </div>
         <center>
-          <Link className="btn btn-primary" to="home" onClick={() => { props.dispatch({type: LOGIN_TYPE, payload: currentUser}); }}>Login Now</Link>
+          <Link className="btn btn-primary" to="home" onClick={() => {  handleClick(props, currentUser, navigate, path)  }}>Login Now</Link>
         </center>
       </div>
     );
   }
 
+  function handleClick(props, currentUser, navigate, path) {
+    props.dispatch({type: LOGIN_TYPE, payload: currentUser});
+
+
+    setTimeout(() => {
+      navigate(path)
+    })
+  }
+
+  //props.dispatch({type: LOGIN_TYPE, payload: currentUser});
 export default connect((state) => ({
 }))(Login);
 
