@@ -19,13 +19,6 @@ function Home(props) {
 
     return (
       <div>
-          <center>
-            <div className="bottom-padding">
-              <h1>Home Page</h1>
-              <span>Current User: {props.currentUser} </span>
-
-            </div>
-          </center>
           <div className="row pb-5">
             <div className="col-4"></div>
             <div className="col-4">
